@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ddb20a8655782a582dc3a6dad53f4ab4",
-    "content-hash": "5f262fe95e79311a910bcefcf700dbaa",
+    "hash": "dcbfdacd3a9f3668e20ef86c8148c9de",
+    "content-hash": "1bac233c9f4a4e2fa9bdc696ba997b06",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -618,6 +618,48 @@
                 "yii2"
             ],
             "time": "2014-11-19 06:44:12"
+        },
+        {
+            "name": "open-ecommerce/yii2-backuprestore",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/open-ecommerce/yii2-backuprestore.git",
+                "reference": "1ea6e80ba161af3d68a8b8d0eb725d034fb22e5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/open-ecommerce/yii2-backuprestore/zipball/1ea6e80ba161af3d68a8b8d0eb725d034fb22e5d",
+                "reference": "1ea6e80ba161af3d68a8b8d0eb725d034fb22e5d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "oe\\modules\\backuprestore\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "open-ecommerce.org",
+                    "email": "info@open-ecommerce.org"
+                }
+            ],
+            "description": "Database Backup and Restore functionality",
+            "keywords": [
+                "backup",
+                "database",
+                "restore",
+                "yii2"
+            ],
+            "time": "2015-04-07 17:03:01"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1273,7 +1315,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "open-ecommerce/yii2-backuprestore": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
