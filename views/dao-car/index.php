@@ -35,83 +35,134 @@ if (Yii::$app->session->hasFlash('su')) {
         </div>
     </div>
     <div class="table-responsive" style="padding-top: 2px;">
-        <?=
-        GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'summary' => '',
-            'pager' => [
-                'maxButtonCount' => 9, // Set maximum number of page buttons that can be displayed
-            ],
-            'summary' => '',
-            'layout' => "{summary}\n{items}\n<div align='center'>{pager}</div>",
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                [
-                    'attribute' => 'amount',
-                    'format' => 'html',
-                    'filter' => false,
-                    //  'contentOptions' => ['style' => 'min-width: 100px;'],
-                    'value' => function ($data) {
-                        return number_format($data->amount, 2);
-                    },
-                ],
-                [
-                    'attribute' => 'status',
-                    'format' => 'html',
-                    'filter' => false,
-                    //  'contentOptions' => ['style' => 'min-width: 100px;'],
-                    'value' => function ($data) {
-                        return ($data->status == "Paid") ? 'ຈ່າຍ​ແລ​້ວ' : ($data->status == "Saving") ? "ເກັບ​ໄວ້" : "ເອົ​າ​ໄປ​ເຮັດ​ແນວ​ອຶ່ນ";
-                    },
-                ],
-                [
-                    'attribute' => 'date',
-                    'format' => 'html',
-                    'filter' => \yii\jui\DatePicker::widget(['language' => 'en',
-                        'dateFormat' => 'yyyy-MM-dd',
-                        'model' => $searchModel,
-                        'attribute' => 'date',
-                        'options' => ['class' => 'form-control'],
-                        'clientOptions' => [
-                            'changeMonth' => true,
-                            'changeYear' => true,
-                            'showButtonPanel' => true,
-                            'dateFormat' => 'yyyy',
-                            'yearRange' => '1960:' . date('Y') . ''
-                        ],
-                    ]),
-                    'contentOptions' => ['style' => 'min-width: 100px;'],
-                    'value' => function ($data) {
-                return $data->date;
-            },
-                ],
-                ['class' => 'yii\grid\ActionColumn',
-                    'template' => '{update} {delete}',
-                    'buttons' => [
-                        'update' => function ($url, $model) {
-                            return Html::a(
-                                            '<span class="glyphicon glyphicon-edit"></span>', ['dao-car/update', 'id' => $model->id], [
-                                        'class' => 'btn btn-success btn-xs',
-                                            ]
-                            );
-                        },
-                                'delete' => function ($url, $model) {
-                            return Html::a(
-                                            '<span class="glyphicon glyphicon-remove"></span>', $url, [
-                                        'title' => 'Delete',
-                                        'data-pjax' => '0',
-                                        'data-method' => "post",
-                                        'data-confirm' => Yii::t('app', 'ທ່ານ​ຕ້ອງ​ການ​ຈະ​ລືບ​ລາຍ​ຈ່າຍ​ແຖວນີ້​ແທ້​ບໍ.?'),
-                                        'class' => 'btn btn-danger btn-xs',
-                                            ]
-                            );
-                        },
-                            ],
-                            'contentOptions' => ['align' => 'right', 'style' => 'min-width: 75px'],
-                        ],
-                    ],
-                ]);
+        <table class="table table-bordered">
+            <tr>
+                <th>​ລດ</th>
+                <th>​ຈຳ​ນວນ​ເງີນ</th>
+                <th>ສະ​ຖາ​ນະ</th>
+                <th>​ວັນ​ທີ</th>
+                <th></th>
+            </tr>
+            <?php
+            $i = 0;
+            $total_save = 0;
+            $total_remark = 0;
+            foreach ($dataProvider->models as $data) {
+                $i++;
+                if ($data->status == "Saving") {
+                    $total_save += $data->amount;
+                }
+                if ($data->status == "remark") {
+                    $total_remark += $data->amount;
+                }
                 ?>
+                <tr>
+                    <td><?= $i ?></td>
+                    <td><?= number_format($data->amount, 2) ?></td>
+                    <td><?= ($data->status == "Paid") ? 'ຈ່າຍ​ແລ​້ວ' : ($data->status == "Saving") ? "ເກັບ​ໄວ້" : "ເອົ​າ​ໄປ​ເຮັດ​ແນວ​ອຶ່ນ"; ?>
+                        <?php
+                        if ($data->status == "remark" || $data->status == "Saving") {
+                            echo "(" . $data->remark . ")";
+                        }
+                        ?>
+                    </td>
+                    <td><?= $data->date ?></td>
+                    <td><?=
+                        Html::a(
+                                '<span class="glyphicon glyphicon-edit"></span>', ['dao-car/update', 'id' => $data->id], [
+                            'class' => 'btn btn-success btn-xs',
+                                ]
+                        );
+                        ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+            <tr>
+                <td></td>
+                <td><b><?= number_format($total_save, 2) ?></b></td>
+                <td><?= number_format($total_remark, 2) ?></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <?php
+        /* GridView::widget([
+          'dataProvider' => $dataProvider,
+          'filterModel' => $searchModel,
+          'summary' => '',
+          'pager' => [
+          'maxButtonCount' => 9, // Set maximum number of page buttons that can be displayed
+          ],
+          'summary' => '',
+          'layout' => "{summary}\n{items}\n<div align='center'>{pager}</div>",
+          'columns' => [
+          ['class' => 'yii\grid\SerialColumn'],
+          [
+          'attribute' => 'amount',
+          'format' => 'html',
+          'filter' => false,
+          //  'contentOptions' => ['style' => 'min-width: 100px;'],
+          'value' => function ($data) {
+          return number_format($data->amount, 2);
+          },
+          ],
+          [
+          'attribute' => 'status',
+          'format' => 'html',
+          'filter' => false,
+          //  'contentOptions' => ['style' => 'min-width: 100px;'],
+          'value' => function ($data) {
+          return ($data->status == "Paid") ? 'ຈ່າຍ​ແລ​້ວ' : ($data->status == "Saving") ? "ເກັບ​ໄວ້" : "ເອົ​າ​ໄປ​ເຮັດ​ແນວ​ອຶ່ນ";
+          },
+          ],
+          [
+          'attribute' => 'date',
+          'format' => 'html',
+          'filter' => \yii\jui\DatePicker::widget(['language' => 'en',
+          'dateFormat' => 'yyyy-MM-dd',
+          'model' => $searchModel,
+          'attribute' => 'date',
+          'options' => ['class' => 'form-control'],
+          'clientOptions' => [
+          'changeMonth' => true,
+          'changeYear' => true,
+          'showButtonPanel' => true,
+          'dateFormat' => 'yyyy',
+          'yearRange' => '1960:' . date('Y') . ''
+          ],
+          ]),
+          'contentOptions' => ['style' => 'min-width: 100px;'],
+          'value' => function ($data) {
+          return $data->date;
+          },
+          ],
+          ['class' => 'yii\grid\ActionColumn',
+          'template' => '{update} {delete}',
+          'buttons' => [
+          'update' => function ($url, $model) {
+          return Html::a(
+          '<span class="glyphicon glyphicon-edit"></span>', ['dao-car/update', 'id' => $model->id], [
+          'class' => 'btn btn-success btn-xs',
+          ]
+          );
+          },
+          'delete' => function ($url, $model) {
+          return Html::a(
+          '<span class="glyphicon glyphicon-remove"></span>', $url, [
+          'title' => 'Delete',
+          'data-pjax' => '0',
+          'data-method' => "post",
+          'data-confirm' => Yii::t('app', 'ທ່ານ​ຕ້ອງ​ການ​ຈະ​ລືບ​ລາຍ​ຈ່າຍ​ແຖວນີ້​ແທ້​ບໍ.?'),
+          'class' => 'btn btn-danger btn-xs',
+          ]
+          );
+          },
+          ],
+          'contentOptions' => ['align' => 'right', 'style' => 'min-width: 75px'],
+          ],
+          ],
+          ]); */
+        ?>
     </div>
 </div>

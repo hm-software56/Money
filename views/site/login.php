@@ -48,7 +48,7 @@ if (!isset($_GET['reg'])) {
         <div class="login-box-body">
             <div class="form-group has-feedback">
                 <div class="line_bottom">ປ້ອນຊື່ເຂົ້າ​ລະ​ບົບ ແລະ ລະ​ຫັດ​ຜ່ານ</div>
-                ຖ້າ​ທ່ານ​ຍັງ​ບໍໍ່​ມີ​ລະ​ຫັດ​ເຂົ້າ​ລະ​ບົບກົດ​ທີ່ນີ້ <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/login&reg=true"><span class="fa fa-registered btn " ></span></a>
+              <!--  ຖ້າ​ທ່ານ​ຍັງ​ບໍໍ່​ມີ​ລະ​ຫັດ​ເຂົ້າ​ລະ​ບົບກົດ​ທີ່ນີ້ <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/login&reg=true"><span class="fa fa-registered btn " ></span></a>-->
             </div>
             <div class="form-group has-feedback">
                 <input type="text" name="LoginForm[username]" class="form-control" placeholder="ຊື່​ເຂົ້າ​ລະ​ບົບ" value="<?= $model->username ?>" required >

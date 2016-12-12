@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="user-form">
-
+    ssssssssssssssssssssssss
     <?php $form = ActiveForm::begin(['action' => ['site/reg'], 'id' => 'forum_post', 'method' => 'post',]); ?>
     <?= $form->field($model, 'first_name')->textInput(['maxlength' => true])->label('ຊື່') ?>
 
@@ -27,5 +27,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    <?php
+    echo'ddddd' . Yii::$app->getHomeUrl();
+    ?>
 </div>

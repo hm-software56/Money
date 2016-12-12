@@ -22,7 +22,8 @@
         "yiisoft/yii2-jui": "^2.0",
         "fedemotta/yii2-widget-datatables": "*",
         "kartik-v/yii2-widget-alert": "*",
-        "open-ecommerce/yii2-backuprestore": "dev-master"
+        "open-ecommerce/yii2-backuprestore": "dev-master",
+        "kartik-v/yii2-grid": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
