@@ -12,14 +12,12 @@ use yii\filters\VerbFilter;
 /**
  * RecieveMoneyController implements the CRUD actions for RecieveMoney model.
  */
-class RecieveMoneyController extends Controller
-{
+class RecieveMoneyController extends Controller {
 
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -30,8 +28,7 @@ class RecieveMoneyController extends Controller
         ];
     }
 
-    public function beforeAction($action)
-    {
+    public function beforeAction($action) {
         if (empty(\Yii::$app->session['user'])) {
             if (Yii::$app->controller->action->id != "login") {
                 $this->redirect(['site/login']);
@@ -49,8 +46,7 @@ class RecieveMoneyController extends Controller
      * Lists all RecieveMoney models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new RecieveMoneySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->pageSize = 10;
@@ -65,8 +61,7 @@ class RecieveMoneyController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
                     'model' => $this->findModel($id),
         ]);
@@ -77,12 +72,20 @@ class RecieveMoneyController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new RecieveMoney();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ລາຍ​ຮັບຖືກ​ເກັບ​ໄວ້​ໃນ​ລະ​ບົບ​ແລ້ວ.....'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', ''));
+            $to = "daxionginfo@gmail.com";
+            $subject = "ປ້ອນ​ລາຍ​ຮັບ (" . $model->user->first_name . ")";
+            $body = "ປະ​ເພດ​ລາຍ​ຮັ​ບ: " . $model->tyeReceive->name . "<br/>" . $model->description . "<br/>";
+            $body.="ຈຳ​ນວນ​ເງີນ​ຮັບ: " . number_format($model->amount) . "ກີບ<br/>";
+            $body.="ຜູ້​ຮັບ: " . $model->user->first_name;
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
+            $headers.="From: {$to}\r\nReply-To: {$to}";
+            mail($to, $subject, $body, $headers);
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -97,13 +100,21 @@ class RecieveMoneyController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ທ່ານ​ສຳ​ເລັດ​ການ​ແກ້​ໄຂ​ແລ້ວລາຍ​ຮັບ​ນີ້​ແລ້ວ......'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', 'ແກ້​ໄຂ'));
+            $to = "daxionginfo@gmail.com";
+            $subject = "ແກ້​ໄຂລາຍ​ຮັບ (" . $model->user->first_name . ")";
+            $body = "ປະ​ເພດ​ລາຍ​ຮັ​ບ: " . $model->tyeReceive->name . "<br/>" . $model->description . "<br/>";
+            $body.="ຈຳ​ນວນ​ເງີນ​ຮັບ: " . number_format($model->amount) . "ກີບ<br/>";
+            $body.="ຜູ້​ຮັບ: " . $model->user->first_name;
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
+            $headers.="From: {$to}\r\nReply-To: {$to}";
+            mail($to, $subject, $body, $headers);
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -118,8 +129,17 @@ class RecieveMoneyController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
+        $model = $this->findModel($id);
+        $to = "daxionginfo@gmail.com";
+        $subject = "ລືບລາຍ​ຮັບ (" . $model->user->first_name . ")";
+        $body = "ປະ​ເພດ​ລາຍ​ຮັ​ບ: " . $model->tyeReceive->name . "<br/>";
+        $body.="ຈຳ​ນວນ​ເງີນ​ຮັບ: " . number_format($model->amount) . "ກີບ<br/>";
+        $body.="ຜູ້​ຮັບ: " . $model->user->first_name;
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
+        $headers.="From: {$to}\r\nReply-To: {$to}";
+        mail($to, $subject, $body, $headers);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -132,8 +152,7 @@ class RecieveMoneyController extends Controller
      * @return RecieveMoney the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = RecieveMoney::findOne($id)) !== null) {
             return $model;
         } else {
@@ -141,8 +160,7 @@ class RecieveMoneyController extends Controller
         }
     }
 
-    public function actionReport()
-    {
+    public function actionReport() {
 
         if (Yii::$app->session['user']->user_type == "Admin") {
             $model = RecieveMoney::find()->joinWith('user')->where(['user.user_role_id' => \Yii::$app->session['user']->user_role_id])->andWhere(['between', 'recieve_money.date', date("Y-m-d", strtotime('monday this week')), date("Y-m-d", strtotime('sunday this week'))])->orderBy('recieve_money.date DESC')->all();

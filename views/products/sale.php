@@ -11,7 +11,7 @@ Modal::begin(['clientOptions' => ['keyboard' => false], 'options' => ['id' => 'd
     <?php
     foreach ($model as $model) {
         ?>
-        <div class="col-md-2 col-xs-6">
+        <div class="col-md-4 col-xs-12">
             <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/thume/<?= $model->image ?>" class="thumbnail img-responsive" />
             ລະ​ຫັດ: <?= $model->code ?>
             <br/>

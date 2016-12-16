@@ -12,11 +12,9 @@ use yii\filters\VerbFilter;
 /**
  * PaymentController implements the CRUD actions for Payment model.
  */
-class PaymentController extends Controller
-{
+class PaymentController extends Controller {
 
-    public function beforeAction($action)
-    {
+    public function beforeAction($action) {
         if (empty(\Yii::$app->session['user'])) {
             if (Yii::$app->controller->action->id != "login") {
                 $this->redirect(['site/login']);
@@ -34,8 +32,7 @@ class PaymentController extends Controller
      * Lists all Payment models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new PaymentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->pageSize = 10;
@@ -45,13 +42,11 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function actionSearch()
-    {
+    public function actionSearch() {
         return $this->renderPartial('search');
     }
 
-    public function actionReport()
-    {
+    public function actionReport() {
         if (isset($_POST['type'])) {
             $type = $_POST['type'];
         } else {
@@ -78,8 +73,7 @@ class PaymentController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
                     'model' => $this->findModel($id),
         ]);
@@ -90,13 +84,22 @@ class PaymentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Payment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ລາຍ​ຈ່າຍ​ຖືກ​ເກັບ​ໄວ້​ໃນ​ລະ​ບົບ​ແລ້ວ'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', ''));
+            $to = "daxionginfo@gmail.com";
+            $subject = "ປ້ອນ​ລາຍ​ຈ່າຍ (" . $model->user->first_name . ")";
+            $body = "ປະ​ເພດ​ລາຍ​ຈ່າຍ: " . $model->typePay->name . "<br/>" . $model->description . "<br/>";
+            $body.="ຈຳ​ນວນ​ເງີນ​ຈ່າຍ: " . number_format($model->amount) . "ກີບ<br/>";
+            $body.="ຜູ້​ຈ່າຍ: " . $model->user->first_name;
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
+            $headers.="From: {$to}\r\nReply-To: {$to}";
+            mail($to, $subject, $body, $headers);
+
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -111,13 +114,21 @@ class PaymentController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ທ່ານ​ສຳ​ເລັດ​ການ​ແກ້​ໄຂ​ແລ້ວ'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', 'ແກ້​ໄຂ'));
+            $to = "daxionginfo@gmail.com";
+            $subject = "ແກ້​ໄຂລາຍ​ຈ່າຍ (" . $model->user->first_name . ")";
+            $body = "ປະ​ເພດ​ລາຍ​ຈ່າຍ: " . $model->typePay->name . "<br/>" . $model->description . "<br/>";
+            $body.="ຈຳ​ນວນ​ເງີນ​ຈ່າຍ: " . number_format($model->amount) . "ກີບ<br/>";
+            $body.="ຜູ້​ຈ່າຍ: " . $model->user->first_name;
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
+            $headers.="From: {$to}\r\nReply-To: {$to}";
+            mail($to, $subject, $body, $headers);
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -132,8 +143,18 @@ class PaymentController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
+        $model = $this->findModel($id);
+        $to = "daxionginfo@gmail.com";
+        $subject = "ລືບລາຍ​ຈ່າຍ (" . $model->user->first_name . ")";
+        $body = "ປະ​ເພດ​ລາຍ​ຈ່າຍ: " . $model->typePay->name . "<br/>";
+        $body.="ຈຳ​ນວນ​ເງີນ​ຈ່າຍ: " . number_format($model->amount) . "ກີບ<br/>";
+        $body.="ຜູ້​ຈ່າຍ: " . $model->user->first_name;
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
+        $headers.="From: {$to}\r\nReply-To: {$to}";
+        mail($to, $subject, $body, $headers);
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -146,8 +167,7 @@ class PaymentController extends Controller
      * @return Payment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Payment::findOne($id)) !== null) {
             return $model;
         } else {
@@ -155,8 +175,7 @@ class PaymentController extends Controller
         }
     }
 
-    public function actionReportchart()
-    {
+    public function actionReportchart() {
         return $this->render('reportchart');
     }
 
