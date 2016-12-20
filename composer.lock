@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c751278bf111037a37fe651bd8eceeb3",
-    "content-hash": "0814fd183a7ac435dc7681cfb249213b",
+    "hash": "3dbaecd2a3b1b37ec5450ed6740a83a6",
+    "content-hash": "396cdea5e68f51dc7e3b6d74bb75dd4a",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -424,6 +424,48 @@
             "time": "2015-03-06 05:28:07"
         },
         {
+            "name": "execut/yii2-backup",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/execut/yii2-backup.git",
+                "reference": "a38ded3ec38ee86c6f88aac823783f486fdca3d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/execut/yii2-backup/zipball/a38ded3ec38ee86c6f88aac823783f486fdca3d9",
+                "reference": "a38ded3ec38ee86c6f88aac823783f486fdca3d9",
+                "shasum": ""
+            },
+            "require": {
+                "yii2mod/yii2-ftp": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "execut\\backup\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "eXeCUT"
+                }
+            ],
+            "description": "Database and files backup command for yii2",
+            "homepage": "https://github.com/execut/yii2-backup",
+            "keywords": [
+                "database backup",
+                "files backup",
+                "yii2"
+            ],
+            "time": "2016-06-17 11:43:42"
+        },
+        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.8.0",
             "source": {
@@ -817,6 +859,48 @@
             "time": "2015-04-07 17:03:01"
         },
         {
+            "name": "spanjeta/yii2-backup",
+            "version": "v2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spanjeta/yii2-backup.git",
+                "reference": "0d84b8eacf3269578f855f5a68fcb8075beda71c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spanjeta/yii2-backup/zipball/0d84b8eacf3269578f855f5a68fcb8075beda71c",
+                "reference": "0d84b8eacf3269578f855f5a68fcb8075beda71c",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "spanjeta\\modules\\backup\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Shiv Charan Panjeta",
+                    "email": "shivcharan.panjeta@gmail.com"
+                }
+            ],
+            "description": "Database Backup and Restore functionality",
+            "keywords": [
+                "backup",
+                "database",
+                "restore",
+                "yii2"
+            ],
+            "time": "2016-10-03 06:37:44"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.3",
             "source": {
@@ -868,6 +952,48 @@
                 "mailer"
             ],
             "time": "2016-07-08 11:51:25"
+        },
+        {
+            "name": "yii2mod/yii2-ftp",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2mod/yii2-ftp.git",
+                "reference": "3bc4be07707f2e6eb9c9a42e5fc629c9604ec96f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2mod/yii2-ftp/zipball/3bc4be07707f2e6eb9c9a42e5fc629c9604ec96f",
+                "reference": "3bc4be07707f2e6eb9c9a42e5fc629c9604ec96f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "yii2mod\\ftp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A flexible FTP and SSL-FTP client for PHP. This lib provides helpers easy to use to manage the remote files.",
+            "keywords": [
+                "extension",
+                "file",
+                "ftp",
+                "helper",
+                "lib",
+                "server",
+                "sftp",
+                "ssl",
+                "ssl-ftp",
+                "yii2"
+            ],
+            "time": "2014-12-22 09:04:48"
         },
         {
             "name": "yiisoft/yii2",
@@ -1473,7 +1599,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "open-ecommerce/yii2-backuprestore": 20,
-        "kartik-v/yii2-grid": 20
+        "kartik-v/yii2-grid": 20,
+        "execut/yii2-backup": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

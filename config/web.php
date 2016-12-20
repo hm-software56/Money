@@ -8,6 +8,9 @@ $config = [
     'bootstrap' => ['log'],
     'modules' => [
         'backuprestore' => ['class' => '\oe\modules\backuprestore\Module',], //'layout' => '@admin-
+        /* 'crud' => [
+          'class' => 'spanjeta\modules\backup\Module',
+          ], */
         'gridview' => [
             'class' => '\kartik\grid\Module'
         // enter optional module parameters below - only if you need to
