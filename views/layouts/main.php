@@ -200,7 +200,7 @@ AppAsset::register($this);
             <?php
             if (empty(\Yii::$app->session['user'])) {
                 ?>
-                <footer class="main-footer">
+                <footer class="main-footer" style="background-color: #3c8dbc; color: #fff;">
                     <div class="pull-right">
                         Version 1.2
                     </div>
