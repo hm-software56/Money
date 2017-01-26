@@ -29,7 +29,10 @@ if (Yii::$app->session->hasFlash('su')) {
 //echo date('dHi') + 5;
 //echo Yii::$app->session['timeout'];
 ?>
+<?php
 
+use hscstudio\chart\ChartNew;
+?>
 <?php
 if (!empty(Yii::$app->session['user'])) {
     ?>
@@ -49,53 +52,29 @@ if (!empty(Yii::$app->session['user'])) {
         <div class="box-footer no-border">
             <?php
             $type_ps = \app\models\TypePay::find()->orderBy('sort ASC')->all();
-            if (Yii::$app->session['user']->user_type == "Admin") {
-                $amount_all = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id where payment.date BETWEEN "' . date("Y-m-d", strtotime('monday this week')) . '" and "' . date("Y-m-d", strtotime('sunday this week')) . '" and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
-            } else {
-                $amount_all = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where date BETWEEN "' . date("Y-m-d", strtotime('monday this week')) . '" and "' . date("Y-m-d", strtotime('sunday this week')) . '" and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
-            }
-
-            if ($amount_all <= 0) {
-                $amount_all = 0.1;
-            }
-            $i = 0;
-            $h = array(1, 4, 7, 10);
-            $f = array(3, 6, 9, 12);
+            $title = [];
+            $data = [];
             foreach ($type_ps as $type_p) {
-
+                $title[] = $type_p->name;
                 if (Yii::$app->session['user']->user_type == "Admin") {
-                    $amount = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id  where payment.date BETWEEN "' . date("Y-m-d", strtotime('monday this week')) . '" and "' . date("Y-m-d", strtotime('sunday this week')) . '"  and type_pay_id=' . $type_p->id . ' and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
+                    $data[] = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id  where payment.date BETWEEN "' . date("Y-m-d", strtotime('monday this week')) . '" and "' . date("Y-m-d", strtotime('sunday this week')) . '"  and type_pay_id=' . $type_p->id . ' and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
                 } else {
-                    $amount = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where date BETWEEN "' . date("Y-m-d", strtotime('monday this week')) . '" and "' . date("Y-m-d", strtotime('sunday this week')) . '"  and type_pay_id=' . $type_p->id . '  and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
-                }
-                if (ceil(($amount * 100) / $amount_all) <= 25) {
-                    $bg = "#108326";
-                } elseif (ceil(($amount * 100) / $amount_all) > 25 && ceil(($amount * 100) / $amount_all) <= 65) {
-                    $bg = "#fad00d";
-                } else {
-                    $bg = "#fa0d1e";
-                }
-                $i++;
-                if (in_array($i, $h)) {
-                    echo "<div class='row'>";
-                }
-                ?>
-
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4;">
-                    <input type="text" class="knob" data-readonly="true" value="<?= ceil(($amount * 100) / $amount_all) ?>" data-width="60" data-height="60" data-fgColor="<?= $bg ?>">
-                    <div class="knob-label">
-                        <a  style="color: #000" tabindex="0"   data-toggle="popover<?= $i ?>" data-placement="top" data-trigger="focus"  data-content="<?= number_format($amount, 2) ?>ກີບ">
-                            <?= $type_p->name ?>
-                        </a>
-                    </div>
-                </div>
-                <?php
-                if (in_array($i, $f)) {
-                    echo "</div>";
-                } elseif ($i == count($type_ps)) {
-                    echo "</div>";
+                    $data[] = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where date BETWEEN "' . date("Y-m-d", strtotime('monday this week')) . '" and "' . date("Y-m-d", strtotime('sunday this week')) . '"  and type_pay_id=' . $type_p->id . '  and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
                 }
             }
+
+            echo ChartNew::widget([
+                'type' => 'bar', # pie, doughnut, line, bar, horizontalBar, radar, polar, stackedBar, polarArea
+                'title' => 'PHP Framework',
+                'width' => '300',
+                'labels' => $title,
+                'colors' => [
+                    'soft' => ['#f44336'],
+                ],
+                'datasets' => [
+                    ['title' => '2014', 'data' => $data],
+                ],
+            ]);
             ?>
         </div>
     </div>
@@ -116,52 +95,28 @@ if (!empty(Yii::$app->session['user'])) {
         <div class="box-footer no-border">
             <?php
             $type_ps = \app\models\TypePay::find()->orderBy('sort ASC')->all();
-            if (Yii::$app->session['user']->user_type == "Admin") {
-                $amount_all_m = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id where month(payment.date)="' . date('m') . '" and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
-            } else {
-                $amount_all_m = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where month(date)="' . date('m') . '" and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
-            }
-            if ($amount_all_m <= 0) {
-                $amount_all_m = 0.1;
-            }
-            $i = 0;
-            $h = array(1, 4, 7, 10);
-            $f = array(3, 6, 9, 12);
+            $title = [];
+            $data = [];
             foreach ($type_ps as $type_p) {
-
+                $title[] = $type_p->name;
                 if (Yii::$app->session['user']->user_type == "Admin") {
-                    $amount_m = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id where month(payment.date)="' . date('m') . '" and type_pay_id=' . $type_p->id . ' and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
+                    $data[] = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id where month(payment.date)="' . date('m') . '" and type_pay_id=' . $type_p->id . ' and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
                 } else {
-                    $amount_m = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where month(date)="' . date('m') . '"  and type_pay_id=' . $type_p->id . '  and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
-                }
-                if (ceil(($amount_m * 100) / $amount_all_m) <= 25) {
-                    $bg = "#108326";
-                } elseif (ceil(($amount_m * 100) / $amount_all_m) > 25 && ceil(($amount_m * 100) / $amount_all_m) <= 65) {
-                    $bg = "#fad00d";
-                } else {
-                    $bg = "#fa0d1e";
-                }
-                $i++;
-                if (in_array($i, $h)) {
-                    echo "<div class='row'>";
-                }
-                ?>
-
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4;">
-                    <input type="text" class="knob" data-readonly="true" value="<?= ceil(($amount_m * 100) / $amount_all_m) ?>" data-width="60" data-height="60" data-fgColor="<?= $bg ?>">
-                    <div class="knob-label">
-                        <a  style="color: #000" tabindex="0"   data-toggle="popover_m<?= $i ?>" data-placement="top" data-trigger="focus"  data-content="<?= number_format($amount_m, 2) ?>ກີບ">
-                            <?= $type_p->name ?>
-                        </a>
-                    </div>
-                </div>
-                <?php
-                if (in_array($i, $f)) {
-                    echo "</div>";
-                } elseif ($i == count($type_ps)) {
-                    echo "</div>";
+                    $data[] = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where month(date)="' . date('m') . '"  and type_pay_id=' . $type_p->id . '  and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
                 }
             }
+            echo ChartNew::widget([
+                'type' => 'bar', # pie, doughnut, line, bar, horizontalBar, radar, polar, stackedBar, polarArea
+                'title' => 'PHP Framework',
+                'width' => '300',
+                'labels' => $title,
+                'colors' => [
+                    'soft' => ['#f44336'],
+                ],
+                'datasets' => [
+                    ['title' => '2014', 'data' => $data],
+                ],
+            ]);
             ?>
         </div>
     </div>
@@ -183,53 +138,29 @@ if (!empty(Yii::$app->session['user'])) {
         <div class="box-footer no-border">
             <?php
             $type_ps = \app\models\TypePay::find()->orderBy('sort ASC')->all();
-            if (Yii::$app->session['user']->user_type == "Admin") {
-                $amount_all_y = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id where year(payment.date)="' . date('Y') . '" and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
-            } else {
-                $amount_all_y = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where year(date)="' . date('Y') . '" and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
-            }
-
-            if ($amount_all_y <= 0) {
-                $amount_all_y = 0.1;
-            }
-            $i = 0;
-            $h = array(1, 4, 7, 10);
-            $f = array(3, 6, 9, 12);
+            $title = [];
+            $data = [];
             foreach ($type_ps as $type_p) {
-
+                $title[] = $type_p->name;
                 if (Yii::$app->session['user']->user_type == "Admin") {
-                    $amount_y = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id where year(payment.date)="' . date('Y') . '" and type_pay_id=' . $type_p->id . ' and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
+                    $data[] = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment LEFT JOIN user ON payment.user_id=user.id where year(payment.date)="' . date('Y') . '" and type_pay_id=' . $type_p->id . ' and user.user_role_id=' . Yii::$app->session['user']->user_role_id . '')->queryScalar();
                 } else {
-                    $amount_y = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where year(date)="' . date('Y') . '"  and type_pay_id=' . $type_p->id . '  and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
-                }
-                if (ceil(($amount_y * 100) / $amount_all_y) <= 25) {
-                    $bg = "#108326";
-                } elseif (ceil(($amount_y * 100) / $amount_all_y) > 25 && ceil(($amount_y * 100) / $amount_all_y) <= 65) {
-                    $bg = "#fad00d";
-                } else {
-                    $bg = "#fa0d1e";
-                }
-                $i++;
-                if (in_array($i, $h)) {
-                    echo "<div class='row'>";
-                }
-                ?>
-
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4;">
-                    <input type="text" class="knob" data-readonly="true" value="<?= ceil(($amount_y * 100) / $amount_all_y) ?>" data-width="60" data-height="60" data-fgColor="<?= $bg ?>">
-                    <div class="knob-label">
-                        <a  style="color: #000" tabindex="0"   data-toggle="popover_y<?= $i ?>" data-placement="top" data-trigger="focus"  data-content="<?= number_format($amount_y, 2) ?>ກີບ">
-                            <?= $type_p->name ?>
-                        </a>
-                    </div>
-                </div>
-                <?php
-                if (in_array($i, $f)) {
-                    echo "</div>";
-                } elseif ($i == count($type_ps)) {
-                    echo "</div>";
+                    $data[] = Yii::$app->db->createCommand('SELECT sum(amount)  FROM payment where year(date)="' . date('Y') . '"  and type_pay_id=' . $type_p->id . '  and user_id=' . Yii::$app->session['user']->id . '')->queryScalar();
                 }
             }
+            echo ChartNew::widget([
+                'type' => 'bar', # pie, doughnut, line, bar, horizontalBar, radar, polar, stackedBar, polarArea
+                'title' => 'PHP Framework',
+                'width' => '300',
+                'labels' => $title,
+                'colors' => [
+                    'soft' => ['#f44336'],
+                    'hard' => ['#f44336'],
+                ],
+                'datasets' => [
+                    ['title' => '2014', 'data' => $data],
+                ],
+            ]);
             ?>
         </div>
     </div>
