@@ -4,9 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc0a8a78b24370bf4bcee0876f1be9f0",
-    "content-hash": "fdf19cd53d224d04fc66ded60684183b",
+    "hash": "04a346b89f42b41e71e8d03a714d770a",
+    "content-hash": "0b0ca3ebf6a2ff5218b370af7bb2192d",
     "packages": [
+        {
+            "name": "abhi1693/yii2-sms",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/abhi1693/yii2-sms.git",
+                "reference": "0dd4ca025c749195704d5c3fd796bba5e373fd8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/abhi1693/yii2-sms/zipball/0dd4ca025c749195704d5c3fd796bba5e373fd8d",
+                "reference": "0dd4ca025c749195704d5c3fd796bba5e373fd8d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-swiftmailer": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "abhimanyu\\sms\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT License"
+            ],
+            "authors": [
+                {
+                    "name": "Abhimanyu Saharan",
+                    "email": "abhimanyu@teamvulcans.com"
+                }
+            ],
+            "description": "Send Free Sms for Yii2",
+            "keywords": [
+                "extension",
+                "sms",
+                "yii2"
+            ],
+            "time": "2015-02-26 09:10:49"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",

@@ -26,7 +26,8 @@
         "kartik-v/yii2-grid": "@dev",
         "spanjeta/yii2-backup": "*",
         "execut/yii2-backup": "dev-master",
-        "hscstudio/yii2-chart": "~1.0"
+        "hscstudio/yii2-chart": "~1.0",
+        "abhi1693/yii2-sms": "2.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
