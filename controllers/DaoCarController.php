@@ -36,7 +36,7 @@ class DaoCarController extends Controller {
     public function actionIndex() {
         $searchModel = new DaoCarSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->pagination->pageSize = 10;
+        $dataProvider->pagination->pageSize = 80;
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,

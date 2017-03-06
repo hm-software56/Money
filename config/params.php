@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'daxionginfo@gmail.com',
     'timeout' => date('dHi') + 10,
 ];
