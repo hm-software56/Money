@@ -47,11 +47,17 @@ if (Yii::$app->session->hasFlash('su')) {
             $i = 0;
             $total_save = 0;
             $total_remark = 0;
+            $total_paid = 0;
             foreach ($dataProvider->models as $data) {
                 $i++;
                 if ($data->status == "Saving") {
                     $total_save += $data->amount;
                 }
+
+                if ($data->status == "Paid") {
+                    $total_paid += $data->amount;
+                }
+
                 if ($data->status == "remark") {
                     $total_remark += $data->amount;
                 }
@@ -59,7 +65,15 @@ if (Yii::$app->session->hasFlash('su')) {
                 <tr>
                     <td><?= $i ?></td>
                     <td><?= number_format($data->amount, 2) ?></td>
-                    <td><?= ($data->status == "Paid") ? 'ຈ່າຍ​ແລ​້ວ' : ($data->status == "Saving") ? "ເກັບ​ໄວ້" : "ເອົ​າ​ໄປ​ເຮັດ​ແນວ​ອຶ່ນ"; ?>
+                    <td><?php
+                        if ($data->status == "Paid") {
+                            echo 'ຈ່າຍ​ແລ​້ວ';
+                        } elseif ($data->status == "Saving") {
+                            echo "ເກັບ​ໄວ້";
+                        } else {
+                            echo "ເອົ​າ​ໄປ​ເຮັດ​ແນວ​ອຶ່ນ";
+                        }
+                        ?>
                         <?php
                         if ($data->status == "remark" || $data->status == "Saving") {
                             echo "(" . $data->remark . ")";
@@ -80,9 +94,9 @@ if (Yii::$app->session->hasFlash('su')) {
             ?>
             <tr>
                 <td></td>
-                <td><b><?= number_format($total_save, 2) ?></b></td>
-                <td><?= number_format($total_remark, 2) ?></td>
-                <td></td>
+                <td class="bg-yellow"><b ><?= number_format($total_save, 2) ?></b></td>
+                <td class="bg-red"><?= number_format($total_remark, 2) ?></td>
+                <td class="bg-green"><?= number_format($total_paid, 2) ?></td>
                 <td></td>
             </tr>
         </table>
