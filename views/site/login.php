@@ -59,10 +59,8 @@ if (!isset($_GET['reg'])) {
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10" style="padding-right: 0px;" align="right">
-                    <button type="submit" class="btn btn-primary btn-sm"><span class="fa fa-lock" ></span> ເຂົ້າ​ລະ​ບົບ</button>
+                <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px;" align="right">
+                    <button type="submit" class="btn btn-primary  col-xs-12"><span class="fa fa-lock" ></span> ເຂົ້າ​ລະ​ບົບ</button>
                 </div>
             </div>
         </div>

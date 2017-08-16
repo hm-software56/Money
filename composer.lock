@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "04a346b89f42b41e71e8d03a714d770a",
-    "content-hash": "0b0ca3ebf6a2ff5218b370af7bb2192d",
+    "hash": "449601d6ba4044614b809e93891aae89",
+    "content-hash": "19e44d3948271bce2c1b690053f5276e",
     "packages": [
         {
             "name": "abhi1693/yii2-sms",
@@ -897,6 +897,57 @@
                 "yii2"
             ],
             "time": "2014-11-19 06:44:12"
+        },
+        {
+            "name": "linslin/yii2-curl",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linslin/Yii2-Curl.git",
+                "reference": "1725afa34bdbc0c85565d6b37b704953e727ddc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linslin/Yii2-Curl/zipball/1725afa34bdbc0c85565d6b37b704953e727ddc4",
+                "reference": "1725afa34bdbc0c85565d6b37b704953e727ddc4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "codeception/base": "^2.2.3",
+                "codeception/specify": "~0.4.3",
+                "codeception/verify": "~0.3.1",
+                "codeclimate/php-test-reporter": "dev-master",
+                "guzzlehttp/guzzle": ">=4.1.4 <7.0",
+                "mcustiel/phiremock-codeception-extension": "1.2.4"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "linslin\\yii2\\curl\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Gajsek",
+                    "email": "info@linslin.org"
+                }
+            ],
+            "description": "Easy and nice cURL extension with RESTful support for Yii2",
+            "keywords": [
+                " curl",
+                "extension",
+                "restful",
+                "yii2"
+            ],
+            "time": "2017-07-24 09:17:39"
         },
         {
             "name": "open-ecommerce/yii2-backuprestore",

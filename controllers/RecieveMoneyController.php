@@ -8,6 +8,7 @@ use app\models\RecieveMoneySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use linslin\yii2\curl;
 
 /**
  * RecieveMoneyController implements the CRUD actions for RecieveMoney model.
@@ -74,7 +75,23 @@ class RecieveMoneyController extends Controller {
      */
     public function actionCreate() {
         $model = new RecieveMoney();
+        $model->refer_id = Yii::$app->params['refer_id'];
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // send to API
+            $curl = new curl\Curl();
+            $value = array(
+                'save_recieved' => true,
+                'amount' => $model->amount,
+                'refer_id' => $model->refer_id,
+                'description' => $model->description,
+                'date' => $model->date,
+                'tye_receive_id' => $model->tye_receive_id,
+                'user_id' => $model->user_id,
+            );
+            $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
+            // end send API
+
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ລາຍ​ຮັບຖືກ​ເກັບ​ໄວ້​ໃນ​ລະ​ບົບ​ແລ້ວ.....'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', ''));
             $to = "daxionginfo@gmail.com";
@@ -104,6 +121,20 @@ class RecieveMoneyController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            // send to API
+            $curl = new curl\Curl();
+            $value = array(
+                'update_recieved' => true,
+                'id' => $model->id,
+                'refer_id' => $model->refer_id,
+                'amount' => $model->amount,
+                'description' => $model->description,
+                'date' => $model->date,
+                'tye_receive_id' => $model->tye_receive_id,
+                'user_id' => $model->user_id,
+            );
+            $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
+            // end send API
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ທ່ານ​ສຳ​ເລັດ​ການ​ແກ້​ໄຂ​ແລ້ວລາຍ​ຮັບ​ນີ້​ແລ້ວ......'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', 'ແກ້​ໄຂ'));
             $to = "daxionginfo@gmail.com";
@@ -141,6 +172,14 @@ class RecieveMoneyController extends Controller {
         $headers.="From: {$to}\r\nReply-To: {$to}";
         mail($to, $subject, $body, $headers);
         $this->findModel($id)->delete();
+        // send to API
+        $curl = new curl\Curl();
+        $value = array(
+            'delete_recieved' => true,
+            'refer_id' => $model->refer_id
+        );
+        $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
+        // end send API
 
         return $this->redirect(['index']);
     }

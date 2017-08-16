@@ -30,26 +30,34 @@ AppAsset::register($this);
                 <?php
                 if (!empty(Yii::$app->session['user'])) {
                     ?>
-                    <a class="logo" href="index.php?r=site/index">
+                    <a id="a" class="logo" href="index.php?r=site/index">
                         <!-- mini logo for sidebar mini 50x50 pixels -->
                         <span class="logo-mini"><b>ລ</b>ກງ</span>
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg">​ລະ​ບົບ​ເກັບ​ກຳ​ເງີນ</span>
+                        <span class="logo-lg">​<b>ລະ​ບົບ​ເກັບ​ກຳ​ເງີນ</b></span>
                     </a>
                     <?php
                 } else {
                     ?>
-                    <a class="logo">
+                    <a id="a" class="logo">
                         <!-- mini logo for sidebar mini 50x50 pixels -->
                         <span class="logo-mini"><b>ລ</b>ກງ</span>
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg">​ລະ​ບົບ​ເກັບ​ກຳ​ເງີນ</span>
+                        <span class="logo-lg">​<b>ລະ​ບົບ​ເກັບ​ກຳ​ເງີນ</b></span>
                     </a>
                     <?php
                 }
                 ?>
                 <!-- Header Navbar: style can be found in header.less -->
-                <nav class="navbar navbar-static-top">
+                <nav class="navbar navbar-static-top"
+                <?php
+                if (empty(Yii::$app->session['user'])) {
+                    ?>
+                         style="background: white !important;"
+                         <?php
+                     }
+                     ?>
+                     >
                     <!-- Sidebar toggle button-->
                     <?php
                     if (!empty(Yii::$app->session['user'])) {
@@ -127,31 +135,31 @@ AppAsset::register($this);
                             if (Yii::$app->session['user']->user_type == "User") {
                                 ?>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
+                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ອອກ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=dao-car">
+                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=dao-car">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ຄ່າ​ລົດ​ໃຫຍ່</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money">
+                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຮັບ​ເຂົ້າ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a  href="#">
                                         <i class="fa fa-signal"></i> <span>ລາຍ​ງານ​</span>
                                     </a>
                                     <ul class="treeview-menu">
                                         <li>
-                                            <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
+                                            <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                                 <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
                                         </li>
                                         <li>
-                                            <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
+                                            <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
                                                 <i class="fa fa-ra"></i>ລາຍ​ງານ​ລາຍ​ຮັບ</a>
                                         </li>
                                     </ul>
@@ -163,20 +171,20 @@ AppAsset::register($this);
                             if (Yii::$app->session['user']->user_type == "Admin") {
                                 ?>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
+                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                         <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
+                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
                                         <i class="fa fa-ra"></i>ລາຍ​ງານ​ລາຍ​ຮັບ</a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/compare">
+                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/compare">
                                         <i class="fa fa-th"></i> <span>ສົ​ມ​ທຽບ​ລາຍ​ຮັບ​ລ່າຍ​ຈ່າຍ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user">
+                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user">
                                         <i class="fa fa-user"></i> <span>ຈັດ​ການຜູ້​ເຂົ້າ​ລະ​ບົບ</span>
                                     </a>
                                 </li>
@@ -191,8 +199,9 @@ AppAsset::register($this);
             }
             ?>
             <!-- Content Wrapper. Contains page content -->
+            <div id="load"></div>
             <div class="content-wrapper" style="background: #fff">
-                <section class="content" >
+                <section class="content" id="content">
                     <?= $content ?>
                 </section>
             </div>
@@ -218,12 +227,25 @@ AppAsset::register($this);
             jQuery(function ($) {
                 $('#money_dao').autoNumeric('init', {aSign: ' ໂດ​ລາ', pSign: 's'});
             });
+
+            document.onreadystatechange = function () {
+                var state = document.readyState
+                if (state == 'interactive') {
+                    document.getElementById('content').style.visibility = "visible";
+                } else if (state == 'complete') {
+                    setTimeout(function () {
+                        document.getElementById('interactive');
+                        document.getElementById('load').style.visibility = "hidden";
+                        document.getElementById('content').style.visibility = "visible";
+                    }, 1000);
+                }
+            }
         </script>
+
         <?php
         if (!empty(Yii::$app->session['user']) && Yii::$app->controller->action->id == "compare") {
 
-            function weekOfMonth($qDate)
-            {
+            function weekOfMonth($qDate) {
                 $dt = strtotime($qDate);
                 $day = date('j', $dt);
                 $month = date('m', $dt);

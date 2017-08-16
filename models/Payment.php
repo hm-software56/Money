@@ -17,26 +17,23 @@ use Yii;
  * @property TypePay $typePay
  * @property User $user
  */
-class Payment extends \yii\db\ActiveRecord
-{
+class Payment extends \yii\db\ActiveRecord {
 
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'payment';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['amount', 'date', 'type_pay_id', 'user_id'], 'required', 'message' => 'ທ່ານ​ຕ້ອງ​ປ້ອນ​ {attribute}'],
             [['type_pay_id', 'user_id'], 'integer'],
-            [['description', 'amount'], 'string'],
+            [['description', 'amount', 'refer_id'], 'string'],
             [['date'], 'safe'],
             [['type_pay_id'], 'exist', 'skipOnError' => true, 'targetClass' => TypePay::className(), 'targetAttribute' => ['type_pay_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -46,8 +43,7 @@ class Payment extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'amount' => 'ຈຳ​ນວນ​ເງີນ',
@@ -61,21 +57,18 @@ class Payment extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTypePay()
-    {
+    public function getTypePay() {
         return $this->hasOne(TypePay::className(), ['id' => 'type_pay_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    public function beforeSave($insert)
-    {
+    public function beforeSave($insert) {
         $this->amount = substr(preg_replace('/\D/', '', $this->amount), 0, -2);
         return parent::beforeSave($insert);
     }

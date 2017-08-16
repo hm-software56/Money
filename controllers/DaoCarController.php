@@ -8,6 +8,7 @@ use app\models\DaoCarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use linslin\yii2\curl;
 
 /**
  * DaoCarController implements the CRUD actions for DaoCar model.
@@ -61,8 +62,23 @@ class DaoCarController extends Controller {
      */
     public function actionCreate() {
         $model = new DaoCar();
+        $model->refer_id = Yii::$app->params['refer_id'];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // send to API
+            $curl = new curl\Curl();
+            $value = array(
+                'save_daocar' => true,
+                'amount' => $model->amount,
+                'refer_id' => $model->refer_id,
+                'status' => $model->status,
+                'date' => $model->date,
+                'remark' => $model->remark,
+            );
+            $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
+            // end send API
+
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ລາຍ​ຈ່າຍ​ຖືກ​ເກັບ​ໄວ້​ໃນ​ລະ​ບົບ​ແລ້ວ'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', ''));
             return $this->redirect(['index']);
@@ -83,6 +99,20 @@ class DaoCarController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // send to API
+            $curl = new curl\Curl();
+            $value = array(
+                'update_daocar' => true,
+                'amount' => $model->amount,
+                'refer_id' => $model->refer_id,
+                'status' => $model->status,
+                'date' => $model->date,
+                'remark' => $model->remark,
+            );
+            $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
+            // end send API
+
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ທ່ານ​ສຳ​ເລັດ​ການ​ແກ້​ໄຂ​ແລ້ວ'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', 'ແກ້​ໄຂ'));
             return $this->redirect(['index']);

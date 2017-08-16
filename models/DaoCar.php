@@ -13,35 +13,31 @@ use Yii;
  * @property string $status
  * @property string $remark
  */
-class DaoCar extends \yii\db\ActiveRecord
-{
+class DaoCar extends \yii\db\ActiveRecord {
 
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'dao_car';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['amount', 'date', 'status'], 'required', 'message' => 'ທ່ານ​ຕ້ອງ​ປ້ອນ​ {attribute}'],
             //  [['amount'], 'integer'],
             [['date'], 'safe'],
-            [['status', 'remark', 'amount'], 'string'],
+            [['status', 'remark', 'amount', 'refer_id'], 'string'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ລະ​ຫັດ',
             'amount' => '​ຈຳ​ນວນ​ເງີນ',
@@ -49,6 +45,11 @@ class DaoCar extends \yii\db\ActiveRecord
             'status' => '​ສະ​ຖາ​ນະ',
             'remark' => '​ໝາຍ​ເຫດ',
         ];
+    }
+
+    public function beforeSave($insert) {
+        $this->amount = substr(preg_replace('/\D/', '', $this->amount), 0, -2);
+        return parent::beforeSave($insert);
     }
 
 }

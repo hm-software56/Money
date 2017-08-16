@@ -31,7 +31,7 @@ AppAsset::register($this);
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>LT</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg">​ລະ​ບົບ​ເກັບ​ກຳ​ເງີນ</span>
+                    <span class="logo-lg">​<b>ລະ​ບົບ​ເກັບ​ກຳ​ເງີນ</b></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top">
@@ -176,8 +176,11 @@ AppAsset::register($this);
             }
             ?>
             <!-- Content Wrapper. Contains page content -->
+            <div id="load"></div>
             <div class="content-wrapper" style="background: #fff;">
-                <section class="content">
+
+                <section class="content" id="content">
+
                     <?= $content ?>
                 </section>
             </div>
@@ -207,8 +210,19 @@ foreach ($type_ps as $type_pss) {
     <?php
 }
 ?>
+            document.onreadystatechange = function () {
+                var state = document.readyState
+                if (state == 'interactive') {
+                    document.getElementById('content').style.visibility = "visible";
+                } else if (state == 'complete') {
+                    setTimeout(function () {
+                        document.getElementById('interactive');
+                        document.getElementById('load').style.visibility = "hidden";
+                        document.getElementById('content').style.visibility = "visible";
+                    }, 1000);
+                }
+            }
         </script>
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
         <script src="adminlte/plugins/daterangepicker/daterangepicker.js"></script>

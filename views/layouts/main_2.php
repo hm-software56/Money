@@ -34,7 +34,7 @@ AppAsset::register($this);
                         <!-- mini logo for sidebar mini 50x50 pixels -->
                         <span class="logo-mini"><b>ລ</b>ກງ</span>
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg">ເກັບ​ກຳ​ສີ້ນ​ຄ້າ</span>
+                        <span class="logo-lg"><b>ເກັບ​ກຳ​ສີ້ນ​ຄ້າ</b></span>
                     </a>
                     <?php
                 } else {
@@ -43,7 +43,7 @@ AppAsset::register($this);
                         <!-- mini logo for sidebar mini 50x50 pixels -->
                         <span class="logo-mini"><b>ລ</b>ກງ</span>
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg">ເກັບ​ກຳ​ສີ້ນ​ຄ້າ</span>
+                        <span class="logo-lg"><b>ເກັບ​ກຳ​ສີ້ນ​ຄ້າ</b></span>
                     </a>
                     <?php
                 }

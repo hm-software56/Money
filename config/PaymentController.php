@@ -88,6 +88,8 @@ class PaymentController extends Controller {
     public function actionCreate() {
         $model = new Payment();
         $model->refer_id = Yii::$app->params['refer_id'];
+        echo Yii::$app->params['refer_id'];
+        exit;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             // send to API
@@ -140,7 +142,6 @@ class PaymentController extends Controller {
             $value = array(
                 'update_payment' => true,
                 'id' => $model->id,
-                'refer_id' => $model->refer_id,
                 'amount' => $model->amount,
                 'description' => $model->description,
                 'date' => $model->date,

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\DaoCar */
@@ -13,7 +14,6 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'amount')->textInput(['data-a-sign' => 'ໂດ​ລາ', 'data-a-dec' => ".", 'data-a-sep' => ",", 'id' => "money_dao"])->label('ຈຳ​ນວນ​ເງີນ') ?>
-
     <?=
     $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
         'dateFormat' => 'yyyy-MM-dd',
@@ -30,9 +30,3 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
-
-<script>
-    jQuery(function ($) {
-        $('#money').autoNumeric('init', {aSign: ' ໂດ​ລາ', pSign: 's'});
-    });
-</script>
