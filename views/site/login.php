@@ -43,7 +43,7 @@ if (!isset($_GET['reg'])) {
                 ],
     ]);
     ?>
-
+<div class="clock"></div>
     <div class="login-box " style="margin-top: 0px;" >
         <div class="login-box-body">
             <div class="form-group has-feedback">
@@ -87,7 +87,6 @@ if (!isset($_GET['reg'])) {
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '<span class="fa fa-save"></span> ລົງ​ທະ​ບຽນ' : '<span class="fa fa-save"></span> ບັນ​ທືກ', ['class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm']) ?>
         </div>
-
         <?php ActiveForm::end(); ?>
 
     </div>

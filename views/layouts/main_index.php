@@ -91,7 +91,7 @@ AppAsset::register($this);
             <?php
             if (!empty(Yii::$app->session['user'])) {
                 ?>
-                <aside class="main-sidebar">
+                <aside class="main-sidebar sidebar-fixed-top">
                     <!-- sidebar: style can be found in sidebar.less -->
                     <section class="sidebar">
                         <!-- Sidebar user panel -->
