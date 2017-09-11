@@ -1,7 +1,6 @@
 <?php
 /* @var $this \yii\web\View */
 /* @var $content string */
-
 use yii\helpers\Html;
 //use yii\bootstrap\Nav;
 //use yii\bootstrap\NavBar;
@@ -9,6 +8,7 @@ use yii\helpers\Html;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ AppAsset::register($this);
 
             <header class="main-header navbar-fixed-top" >
                 <!-- Logo -->
-                <a class="logo" href="index.php?r=site/index">
+                <a class="logo" href="index.php?r=site/home">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>LT</span>
                     <!-- logo for regular state and mobile devices -->
@@ -38,18 +38,21 @@ AppAsset::register($this);
                     <!-- Sidebar toggle button-->
                     <?php
                     if (!empty(Yii::$app->session['user'])) {
+
                         ?>
                         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                             <span class="sr-only">Toggle navigation</span>
                         </a>
                         <?php
                     }
+
                     ?>
                     <div class="navbar-custom-menu">
 
                         <ul class="nav navbar-nav">
                             <?php
                             if (!empty(Yii::$app->session['user'])) {
+
                                 ?>
                                 <li class="dropdown user user-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -62,7 +65,7 @@ AppAsset::register($this);
                                             <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/thume/<?= Yii::$app->session['user']->photo ?>" class="img-circle" alt="User Image">
 
                                             <p>
-                                                <?= Yii::$app->session['user']->first_name ?>
+    <?= Yii::$app->session['user']->first_name ?>
                                                 <small><?= Yii::$app->session['user']->last_name ?></small>
                                             </p>
                                         </li>
@@ -79,18 +82,20 @@ AppAsset::register($this);
                                     </ul>
                                 </li>
                                 <!-- Control Sidebar Toggle Button -->
-                                <?php
-                            }
-                            ?>
+    <?php
+}
+
+?>
                         </ul>
 
                     </div>
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
-            <?php
-            if (!empty(Yii::$app->session['user'])) {
-                ?>
+<?php
+if (!empty(Yii::$app->session['user'])) {
+
+    ?>
                 <aside class="main-sidebar sidebar-fixed-top">
                     <!-- sidebar: style can be found in sidebar.less -->
                     <section class="sidebar">
@@ -107,9 +112,10 @@ AppAsset::register($this);
                         <!-- sidebar menu: : style can be found in sidebar.less -->
                         <ul class="sidebar-menu">
                             <li class="header">ເມ​ນູ​ຫຼັກ</li>
-                            <?php
-                            if (Yii::$app->session['user']->user_type == "User") {
-                                ?>
+    <?php
+    if (Yii::$app->session['user']->user_type == "User") {
+
+        ?>
                                 <li>
                                     <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ອອກ</span>
@@ -142,11 +148,13 @@ AppAsset::register($this);
                                 </li>
                                 <?php
                             }
+
                             ?>
 
-                            <?php
-                            if (Yii::$app->session['user']->user_type == "Admin") {
-                                ?>
+    <?php
+    if (Yii::$app->session['user']->user_type == "Admin") {
+
+        ?>
                                 <li>
                                     <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                         <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
@@ -165,29 +173,31 @@ AppAsset::register($this);
                                         <i class="fa fa-user"></i> <span>ຈັດ​ການຜູ້​ເຂົ້າ​ລະ​ບົບ</span>
                                     </a>
                                 </li>
-                                <?php
-                            }
-                            ?>
+                    <?php
+                }
+
+                ?>
                         </ul>
                     </section>
                     <!-- /.sidebar -->
                 </aside>
-                <?php
-            }
-            ?>
+                        <?php
+                    }
+
+                    ?>
             <!-- Content Wrapper. Contains page content -->
             <div id="load"></div>
             <div class="content-wrapper" style="background: #fff;">
 
                 <section class="content" id="content">
 
-                    <?= $content ?>
+<?= $content ?>
                 </section>
             </div>
             <!-- /.content-wrapper -->
 
         </div>
-        <?php $this->endBody() ?>
+<?php $this->endBody() ?>
         <script>
             jQuery(function ($) {
                 $('#money').autoNumeric('init', {aSign: ' ກີບ', pSign: 's'});
@@ -197,6 +207,7 @@ $type_ps = \app\models\TypePay::find()->orderBy('sort ASC')->all();
 $w = 0;
 foreach ($type_ps as $type_pss) {
     $w++;
+
     ?>
                 $(function () {
                     $('[data-toggle="popover<?= $w ?>"]').popover()
@@ -209,6 +220,7 @@ foreach ($type_ps as $type_pss) {
                 })
     <?php
 }
+
 ?>
             document.onreadystatechange = function () {
                 var state = document.readyState

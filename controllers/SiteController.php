@@ -1,6 +1,4 @@
-<?php
-
-namespace app\controllers;
+<?php namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
@@ -9,9 +7,11 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller {
+class SiteController extends Controller
+{
 
-    public function beforeAction($action) {
+    public function beforeAction($action)
+    {
         if (empty(\Yii::$app->session['user'])) {
             if (Yii::$app->controller->action->id != "login") {
                 if (Yii::$app->controller->action->id == "reg") {
@@ -36,7 +36,8 @@ class SiteController extends Controller {
     /**
      * @inheritdoc
      */
-    public function actions() {
+    public function actions()
+    {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -53,11 +54,13 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         return $this->render('index');
     }
 
-    public function actionPage() {
+    public function actionPage()
+    {
         return $this->render('page');
     }
 
@@ -66,7 +69,8 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionLogin() {
+    public function actionLogin()
+    {
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -83,7 +87,7 @@ class SiteController extends Controller {
                 if ($user->id == "15") {
                     return $this->redirect(['products/index']);
                 } else {
-                    return $this->redirect(['site/index']);
+                    return $this->redirect(['site/home']);
                 }
             } else {
                 \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ທ່ານ​ປ້ອນ​ຊື່ຫຼື​ລະ​ຫັດ​ເຂົ້າ​ລະ​ບົບ​ບໍ່ຖືກ'));
@@ -91,9 +95,14 @@ class SiteController extends Controller {
             }
         }
         return $this->render('login', [
-                    'model' => $model,
-                    'login' => $login,
+                'model' => $model,
+                'login' => $login,
         ]);
+    }
+
+    public function actionHome()
+    {
+        return $this->render('home');
     }
 
     /**
@@ -101,7 +110,8 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionLogout() {
+    public function actionLogout()
+    {
         unset(\Yii::$app->session['user']);
         return $this->goHome();
     }
@@ -111,7 +121,8 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionContact() {
+    public function actionContact()
+    {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
@@ -119,7 +130,7 @@ class SiteController extends Controller {
             return $this->refresh();
         }
         return $this->render('contact', [
-                    'model' => $model,
+                'model' => $model,
         ]);
     }
 
@@ -128,11 +139,13 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionAbout() {
+    public function actionAbout()
+    {
         return $this->render('about');
     }
 
-    public function actionReg() {
+    public function actionReg()
+    {
         $model = new \app\models\User();
         if ($model->load(Yii::$app->request->post())) {
             $model->photo = 'prof.png';
@@ -142,18 +155,18 @@ class SiteController extends Controller {
                 return $this->redirect(['login']);
             } else {
                 return $this->render('form', [
-                            'model' => $model,
+                        'model' => $model,
                 ]);
             }
         } else {
             return $this->render('form', [
-                        'model' => $model,
+                    'model' => $model,
             ]);
         }
     }
 
-    public function actionCompare() {
+    public function actionCompare()
+    {
         return $this->render('compare');
     }
-
 }

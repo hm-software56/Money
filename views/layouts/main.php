@@ -1,7 +1,6 @@
 <?php
 /* @var $this \yii\web\View */
 /* @var $content string */
-
 use yii\helpers\Html;
 //use yii\bootstrap\Nav;
 //use yii\bootstrap\NavBar;
@@ -9,6 +8,7 @@ use yii\helpers\Html;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,8 +29,9 @@ AppAsset::register($this);
                 <!-- Logo -->
                 <?php
                 if (!empty(Yii::$app->session['user'])) {
+
                     ?>
-                    <a id="a" class="logo" href="index.php?r=site/index">
+                    <a id="a" class="logo" href="index.php?r=site/home">
                         <!-- mini logo for sidebar mini 50x50 pixels -->
                         <span class="logo-mini"><b>ລ</b>ກງ</span>
                         <!-- logo for regular state and mobile devices -->
@@ -38,6 +39,7 @@ AppAsset::register($this);
                     </a>
                     <?php
                 } else {
+
                     ?>
                     <a id="a" class="logo">
                         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -47,33 +49,39 @@ AppAsset::register($this);
                     </a>
                     <?php
                 }
+
                 ?>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top"
-                <?php
-                if (empty(Yii::$app->session['user'])) {
-                    ?>
+                     <?php
+                     if (empty(Yii::$app->session['user'])) {
+
+                         ?>
                          style="background: white !important;"
-                         <?php
-                     }
-                     ?>
+                        <?php
+                    }
+
+                    ?>
                      >
                     <!-- Sidebar toggle button-->
                     <?php
                     if (!empty(Yii::$app->session['user'])) {
+
                         ?>
                         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                             <span class="sr-only">Toggle navigation</span>
                         </a>
-                        <?php
-                    }
-                    ?>
+                                <?php
+                            }
+
+                            ?>
                     <div class="navbar-custom-menu">
 
                         <ul class="nav navbar-nav">
-                            <?php
-                            if (!empty(Yii::$app->session['user'])) {
-                                ?>
+<?php
+if (!empty(Yii::$app->session['user'])) {
+
+    ?>
                                 <li class="dropdown user user-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/thume/<?= Yii::$app->session['user']->photo ?>" class="user-image" alt="User Image">
@@ -85,7 +93,7 @@ AppAsset::register($this);
                                             <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/thume/<?= Yii::$app->session['user']->photo ?>" class="img-circle" alt="User Image">
 
                                             <p>
-                                                <?= Yii::$app->session['user']->first_name ?>
+    <?= Yii::$app->session['user']->first_name ?>
                                                 <small><?= Yii::$app->session['user']->last_name ?></small>
                                             </p>
                                         </li>
@@ -102,18 +110,20 @@ AppAsset::register($this);
                                     </ul>
                                 </li>
                                 <!-- Control Sidebar Toggle Button -->
-                                <?php
-                            }
-                            ?>
+                <?php
+            }
+
+            ?>
                         </ul>
 
                     </div>
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
-            <?php
-            if (!empty(Yii::$app->session['user'])) {
-                ?>
+<?php
+if (!empty(Yii::$app->session['user'])) {
+
+    ?>
                 <aside class="main-sidebar sidebar-fixed-top">
                     <!-- sidebar: style can be found in sidebar.less -->
                     <section class="sidebar">
@@ -131,9 +141,10 @@ AppAsset::register($this);
                         <ul class="sidebar-menu">
                             <li class="header">ເມ​ນູ​ຫຼັກ</li>
 
-                            <?php
-                            if (Yii::$app->session['user']->user_type == "User") {
-                                ?>
+    <?php
+    if (Yii::$app->session['user']->user_type == "User") {
+
+        ?>
                                 <li>
                                     <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ອອກ</span>
@@ -164,12 +175,14 @@ AppAsset::register($this);
                                         </li>
                                     </ul>
                                 </li>
-                                <?php
-                            }
-                            ?>
-                            <?php
-                            if (Yii::$app->session['user']->user_type == "Admin") {
-                                ?>
+        <?php
+    }
+
+    ?>
+    <?php
+    if (Yii::$app->session['user']->user_type == "Admin") {
+
+        ?>
                                 <li>
                                     <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                         <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
@@ -188,38 +201,42 @@ AppAsset::register($this);
                                         <i class="fa fa-user"></i> <span>ຈັດ​ການຜູ້​ເຂົ້າ​ລະ​ບົບ</span>
                                     </a>
                                 </li>
-                                <?php
-                            }
-                            ?>
+                            <?php
+                        }
+
+                        ?>
                         </ul>
                     </section>
                     <!-- /.sidebar -->
                 </aside>
-                <?php
-            }
-            ?>
+    <?php
+}
+
+?>
             <!-- Content Wrapper. Contains page content -->
             <div id="load"></div>
             <div class="content-wrapper" style="background: #fff">
                 <section class="content" id="content">
-                    <?= $content ?>
+            <?= $content ?>
                 </section>
             </div>
             <!-- /.content-wrapper -->
-            <?php
-            if (empty(\Yii::$app->session['user'])) {
-                ?>
+<?php
+if (empty(\Yii::$app->session['user'])) {
+
+    ?>
                 <footer class="main-footer bg_footer " >
                     <div class="pull-right">
                         Version 1.3
                     </div>
                     ໂທ: 020 55045770
                 </footer>
-                <?php
-            }
-            ?>
+    <?php
+}
+
+?>
         </div>
-        <?php $this->endBody() ?>
+<?php $this->endBody() ?>
         <script>
             jQuery(function ($) {
                 $('#money').autoNumeric('init', {aSign: ' ກີບ', pSign: 's'});
@@ -245,7 +262,8 @@ AppAsset::register($this);
         <?php
         if (!empty(Yii::$app->session['user']) && Yii::$app->controller->action->id == "compare") {
 
-            function weekOfMonth($qDate) {
+            function weekOfMonth($qDate)
+            {
                 $dt = strtotime($qDate);
                 $day = date('j', $dt);
                 $month = date('m', $dt);
@@ -268,7 +286,6 @@ AppAsset::register($this);
                 }
                 return $retWeek;
             }
-
             $w = weekOfMonth(date('Y-m-d')) - 2;
             // exit;
             $r_w = array();
@@ -317,6 +334,7 @@ AppAsset::register($this);
             }
             $a_y = json_encode($amount_y_pay);
             $b_y = json_encode($amount_y_recieve);
+
             ?>
             <script>
                 $(function () {
@@ -541,33 +559,30 @@ AppAsset::register($this);
                 });
 
             </script>
-            <?php
-        }
-        ?>
+    <?php
+}
+
+?>
         <script>
-                   function clock() {// We create a new Date object and assign it to a variable called "time".
-                   var time = new Date(),
+            function clock() {// We create a new Date object and assign it to a variable called "time".
+                var time = new Date(),
+                        // Access the "getHours" method on the Date object with the dot accessor.
+                        hours = time.getHours(),
+                        // Access the "getMinutes" method with the dot accessor.
+                        minutes = time.getMinutes(),
+                        seconds = time.getSeconds();
 
-                       // Access the "getHours" method on the Date object with the dot accessor.
-                       hours = time.getHours(),
+                document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes) + ":" + harold(seconds);
 
-                       // Access the "getMinutes" method with the dot accessor.
-                       minutes = time.getMinutes(),
-
-
-                       seconds = time.getSeconds();
-
-                   document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes) + ":" + harold(seconds);
-
-                     function harold(standIn) {
-                       if (standIn < 10) {
-                         standIn = '0' + standIn
-                       }
-                       return standIn;
-                     }
-                   }
-                   setInterval(clock, 1000);
-       </script>
+                function harold(standIn) {
+                    if (standIn < 10) {
+                        standIn = '0' + standIn
+                    }
+                    return standIn;
+                }
+            }
+            setInterval(clock, 1000);
+        </script>
     </body>
 </html>
 <?php $this->endPage() ?>
