@@ -5,9 +5,9 @@ use yii\helpers\Html;
 //use yii\bootstrap\Nav;
 //use yii\bootstrap\NavBar;
 //use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
+use app\assets\AppAssetSMS;
 
-AppAsset::register($this);
+AppAssetSMS::register($this);
 
 ?>
 <?php $this->beginPage() ?>
@@ -21,13 +21,7 @@ AppAsset::register($this);
         <?php $this->head() ?>
 
     </head>
-    <?php
-    $bg_menu = 'skin-purple';
-    $bg_footer = 'bg-purple';
-    Yii::$app->session['bg_buttoon'] = 'bg-purple';
-
-    ?>
-    <body class="hold-transition <?= $bg_menu ?> sidebar-mini">
+    <body class="hold-transition skin-blue sidebar-mini">
         <?php $this->beginBody() ?>
         <div class="wrapper">
 
@@ -228,40 +222,39 @@ AppAsset::register($this);
             </div>
             <!-- /.content-wrapper -->
             <?php
-            //   if (empty(\Yii::$app->session['user'])) {
+            if (empty(\Yii::$app->session['user'])) {
 
-            ?>
+                ?>
+                <footer class="main-footer bg_footer " style="background: #367fa9; color: #fff" >
+                    <div class="pull-right">
+                        <a href="index.php?r=site/sms" style="color: #fff">
+                            <?php
+                            $cookie = Yii::$app->request->cookies;
+                            $cookieValue = $cookie->getValue('check_sms');
 
-            <footer class="main-footer  <?= $bg_footer ?> " style=" color: #fff" >
-                <div class="pull-right">
-                    <a href="index.php?r=site/sms" style="color: #fff">
-                        <?php
-                        $cookie = Yii::$app->request->cookies;
-                        $cookieValue = $cookie->getValue('check_sms');
-
-                        $sms = app\models\Sms::find()->where('date>="' . date('Y-m-d H:i:s', strtotime('-10 days')) . '" and date<="' . date('Y-m-d H:i:s', strtotime('1 days')) . '"')->orderBy('id DESC')->all();
-                        $i = 0;
-                        foreach ($sms as $sms) {
-                            if (!in_array($cookieValue, explode(',', $sms->user_id))) {
-                                $i++;
+                            $sms = app\models\Sms::find()->where('date>="' . date('Y-m-d H:i:s', strtotime('-10 days')) . '" and date<="' . date('Y-m-d H:i:s', strtotime('1 days')) . '"')->orderBy('id DESC')->all();
+                            $i = 0;
+                            foreach ($sms as $sms) {
+                                if (!in_array($cookieValue, array($sms->user_id))) {
+                                    $i++;
+                                }
                             }
-                        }
-                        if ($i > 0) {
+                            if ($i > 0) {
+
+                                ?>
+                                <span class="ft label label-danger"><?= $i ?> </span>
+                                <?php
+                            }
 
                             ?>
-                            <span class="ft label label-danger"><?= $i ?> </span>
-                            <?php
-                        }
+                            <i class="fa fa-envelope-o fa-2x"></i>
+                        </a>
+                    </div>
+                    <a href="index.php?r=site/home" style="color: #fff"> <li class="fa fa-home fa-2x"></li></a>
 
-                        ?>
-                        <i class="fa fa-envelope-o fa-2x"></i>
-                    </a>
-                </div>
-                <a href="index.php?r=site/home" style="color: #fff"> <li class="fa fa-home fa-2x"></li></a>
-
-            </footer>
-            <?php
-            //  }
+                </footer>
+                <?php
+            }
 
             ?>
         </div>

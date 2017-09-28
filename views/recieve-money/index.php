@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\alert\Alert;
@@ -21,6 +20,7 @@ if (Yii::$app->session->hasFlash('su')) {
         'delay' => 2000
     ]);
 }
+
 ?>
 <?php Pjax::begin() ?>
 <div class="payment-index">
@@ -32,7 +32,7 @@ if (Yii::$app->session->hasFlash('su')) {
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4">
             <p align='right'>
-                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຮັບ', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຮັບ', ['create'], ['class' => 'btn ' . Yii::$app->session['bg_buttoon'] . ' btn-sm']) ?>
             </p>
         </div>
     </div>
@@ -55,8 +55,8 @@ if (Yii::$app->session->hasFlash('su')) {
                     'format' => 'html',
                     'contentOptions' => ['style' => 'min-width: 100px;'],
                     'value' => function ($data) {
-                return $data->tyeReceive->name;
-            },
+                    return $data->tyeReceive->name;
+                },
                 ],
                 [
                     'attribute' => 'amount',
@@ -64,8 +64,8 @@ if (Yii::$app->session->hasFlash('su')) {
                     'format' => 'html',
                     'contentOptions' => ['style' => 'min-width: 100px;'],
                     'value' => function ($data) {
-                return number_format($data->amount, 2);
-            },
+                    return number_format($data->amount, 2);
+                },
                 ],
                 [
                     'attribute' => 'date',
@@ -77,28 +77,29 @@ if (Yii::$app->session->hasFlash('su')) {
                     'buttons' => [
                         'update' => function ($url, $model) {
                             return Html::a(
-                                            '<span class="glyphicon glyphicon-edit"></span>', ['recieve-money/update', 'id' => $model->id], [
-                                        'class' => 'btn btn-success btn-xs',
-                                            ]
+                                    '<span class="glyphicon glyphicon-edit"></span>', ['recieve-money/update', 'id' => $model->id], [
+                                    'class' => 'btn btn-success btn-xs',
+                                    ]
                             );
                         },
-                                'delete' => function ($url, $model) {
+                            'delete' => function ($url, $model) {
                             return Html::a(
-                                            '<span class="glyphicon glyphicon-remove"></span>', $url, [
-                                        'title' => 'Delete',
-                                        'data-pjax' => '0',
-                                        'data-method' => "post",
-                                        'data-confirm' => Yii::t('app', 'ທ່ານ​ຕ້ອງ​ການ​ຈະ​ລືບ​ລາຍ​ຮັບແຖວນີ້​ແທ້​ບໍ.?'),
-                                        'class' => 'btn btn-danger btn-xs',
-                                            ]
+                                    '<span class="glyphicon glyphicon-remove"></span>', $url, [
+                                    'title' => 'Delete',
+                                    'data-pjax' => '0',
+                                    'data-method' => "post",
+                                    'data-confirm' => Yii::t('app', 'ທ່ານ​ຕ້ອງ​ການ​ຈະ​ລືບ​ລາຍ​ຮັບແຖວນີ້​ແທ້​ບໍ.?'),
+                                    'class' => 'btn btn-danger btn-xs',
+                                    ]
                             );
                         },
-                            ],
-                            'contentOptions' => ['align' => 'right', 'style' => 'min-width: 75px'],
                         ],
+                        'contentOptions' => ['align' => 'right', 'style' => 'min-width: 75px'],
                     ],
-                ]);
-                ?>
-            </div>
+                ],
+            ]);
+
+            ?>
         </div>
-        <?php Pjax::end(); ?>
+    </div>
+    <?php Pjax::end(); ?>

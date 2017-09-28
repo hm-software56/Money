@@ -14,8 +14,15 @@ class SiteController extends Controller
     {
         if (empty(\Yii::$app->session['user'])) {
             if (Yii::$app->controller->action->id != "login") {
-                if (Yii::$app->controller->action->id == "reg") {
-
+                if (Yii::$app->controller->action->id == "sms") {
+                    $cookie = Yii::$app->request->cookies;
+                    if ($cookie->has('check_sms'))
+                        $cookieValue = $cookie->getValue('check_sms');
+                    if (isset($cookieValue)) {
+                        return $this->render('sms');
+                    } else {
+                        $this->redirect(['site/login']);
+                    }
                 } else {
                     $this->redirect(['site/login']);
                 }
@@ -59,6 +66,27 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionSms()
+    {
+        if (isset($_GET['id'])) {
+            $sms = \app\models\Sms::find()->where(['id' => $_GET['id']])->one();
+            $cookie = Yii::$app->request->cookies;
+            $cookieValue = $cookie->getValue('check_sms');
+            if (!in_array($cookieValue, array($sms->user_id))) {
+                if (empty($sms->user_id)) {
+                    $sms->user_id = "$cookieValue";
+                } else {
+                    $sms->user_id = $sms->user_id . "," . $cookieValue;
+                }
+                $sms->save();
+            }
+            $a = 'ອ່ານ​ແລ້ວ...';
+        } else {
+            $a = NULL;
+        }
+        return $this->render('sms', [ 'a' => $a]);
+    }
+
     public function actionPage()
     {
         return $this->render('page');
@@ -87,6 +115,12 @@ class SiteController extends Controller
                 if ($user->id == "15") {
                     return $this->redirect(['products/index']);
                 } else {
+                    $cookies = Yii::$app->response->cookies;
+                    $cookies->add(new \yii\web\Cookie([
+                        'name' => 'check_sms',
+                        'value' => $user->id,
+                        //   'expire' => time() + 86400 * 365,
+                    ]));
                     return $this->redirect(['site/home']);
                 }
             } else {

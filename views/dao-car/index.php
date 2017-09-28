@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\alert\Alert;
@@ -20,6 +19,7 @@ if (Yii::$app->session->hasFlash('su')) {
         'delay' => 2000
     ]);
 }
+
 ?>
 <div class="dao-car-index">
     <div class="row">
@@ -30,7 +30,7 @@ if (Yii::$app->session->hasFlash('su')) {
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4">
             <p align='right'>
-                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຈ່າຍ', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຈ່າຍ', ['create'], ['class' => 'btn ' . Yii::$app->session['bg_buttoon'] . ' btn-sm']) ?>
             </p>
         </div>
     </div>
@@ -61,6 +61,7 @@ if (Yii::$app->session->hasFlash('su')) {
                 if ($data->status == "remark") {
                     $total_remark += $data->amount;
                 }
+
                 ?>
                 <tr>
                     <td><?= $i ?></td>
@@ -73,25 +74,29 @@ if (Yii::$app->session->hasFlash('su')) {
                         } else {
                             echo "ເອົ​າ​ໄປ​ເຮັດ​ແນວ​ອຶ່ນ";
                         }
+
                         ?>
                         <?php
                         if ($data->status == "remark" || $data->status == "Saving") {
                             echo "(" . $data->remark . ")";
                         }
+
                         ?>
                     </td>
                     <td><?= $data->date ?></td>
                     <td><?=
                         Html::a(
-                                '<span class="glyphicon glyphicon-edit"></span>', ['dao-car/update', 'id' => $data->id], [
+                            '<span class="glyphicon glyphicon-edit"></span>', ['dao-car/update', 'id' => $data->id], [
                             'class' => 'btn btn-success btn-xs',
-                                ]
+                            ]
                         );
+
                         ?></td>
                 </tr>
-                <?php
-            }
-            ?>
+    <?php
+}
+
+?>
             <tr>
                 <td></td>
                 <td class="bg-yellow"><b ><?= number_format($total_save, 2) ?></b></td>
@@ -177,6 +182,7 @@ if (Yii::$app->session->hasFlash('su')) {
           ],
           ],
           ]); */
+
         ?>
     </div>
 </div>

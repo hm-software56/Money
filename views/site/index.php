@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\alert\Alert;
@@ -28,13 +27,15 @@ if (Yii::$app->session->hasFlash('su')) {
 }
 //echo date('dHi') + 5;
 //echo Yii::$app->session['timeout'];
+
 ?>
 <?php
-
 use hscstudio\chart\ChartNew;
+
 ?>
 <?php
 if (!empty(Yii::$app->session['user'])) {
+
     ?>
     <div class="box box-solid bg-teal-gradient">
         <div class="box-header">
@@ -75,6 +76,7 @@ if (!empty(Yii::$app->session['user'])) {
                     ['title' => '2014', 'data' => $data],
                 ],
             ]);
+
             ?>
         </div>
     </div>
@@ -117,6 +119,7 @@ if (!empty(Yii::$app->session['user'])) {
                     ['title' => '2014', 'data' => $data],
                 ],
             ]);
+
             ?>
         </div>
     </div>
@@ -161,10 +164,12 @@ if (!empty(Yii::$app->session['user'])) {
                     ['title' => '2014', 'data' => $data],
                 ],
             ]);
+
             ?>
         </div>
     </div>
     <?php
 }
+
 ?>
 
