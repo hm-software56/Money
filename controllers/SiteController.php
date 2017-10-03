@@ -37,6 +37,24 @@ class SiteController extends Controller
         if (Yii::$app->controller->action->id == "index") {
             $this->layout = 'main_index'; //your layout name site index
         }
+        if (Yii::$app->controller->action->id == "home") {
+            if (isset(Yii::$app->session['rmsms'])) {
+                $cookie = Yii::$app->request->cookies;
+                $cookieValue = $cookie->getValue('check_sms');
+                $sms = \app\models\Sms::find()->where('date>="' . date('Y-m-d H:i:s', strtotime('-10 days')) . '" and date<="' . date('Y-m-d H:i:s', strtotime('1 days')) . '"')->orderBy('id DESC')->all();
+                foreach ($sms as $sms) {
+                    if (!in_array($cookieValue, array($sms->user_id))) {
+                        if (empty($sms->user_id)) {
+                            $sms->user_id = "$cookieValue";
+                        } else {
+                            $sms->user_id = $sms->user_id . "," . $cookieValue;
+                        }
+                        $sms->save();
+                        unset(Yii::$app->session['rmsms']);
+                    }
+                }
+            }
+        }
         return parent::beforeAction($action);
     }
 
@@ -68,6 +86,7 @@ class SiteController extends Controller
 
     public function actionSms()
     {
+        Yii::$app->session['rmsms'] = TRUE;
         if (isset($_GET['id'])) {
             $sms = \app\models\Sms::find()->where(['id' => $_GET['id']])->one();
             $cookie = Yii::$app->request->cookies;
@@ -84,7 +103,7 @@ class SiteController extends Controller
         } else {
             $a = NULL;
         }
-        return $this->render('sms', [ 'a' => $a]);
+        return $this->render('sms', ['a' => $a]);
     }
 
     public function actionPage()

@@ -102,12 +102,15 @@ class RecieveMoneyController extends Controller
             $subject = "ປ້ອນ​ລາຍ​ຮັບ (" . $model->user->first_name . ")";
             $title = "ຮັ​ບໂດຍ: (" . $model->user->first_name . ")<br/>";
             $body = "ປະ​ເພດ​ລາຍ​ຮັ​ບ: " . $model->tyeReceive->name . "<br/>";
+            if (!empty($model->description)) {
+                $body.=$model->description . '<br/>';
+            }
             $body.="ຈຳ​ນວນ​ເງີນ​ຮັບ: " . number_format($model->amount) . "ກີບ<br/>";
             $body.="ວັ​ນ​ທີຮັບ: " . $model->date;
-            /* $headers = "MIME-Version: 1.0" . "\r\n";
-              $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
-              $headers.="From: {$to}\r\nReply-To: {$to}";
-              mail($to, $subject, $body, $headers); */
+
+            $sms = 'ຮັ​ບໂດຍ:' . $model->user->first_name . ", ປະ​ເພດ​ລາຍ​ຮັ​ບ:" . $model->tyeReceive->name . ', ຈຳ​ນວນ​ເງີນ​ຮັບ:' . number_format($model->amount) . 'ກີບ, ວັ​ນ​ທີຮັບ:' . $model->date;
+            $payment_notification = \app\models\Payment::onesignalnotification($sms);
+
             $sms = new \app\models\Sms();
             $sms->details = $body;
             $sms->title = $title;
@@ -151,6 +154,9 @@ class RecieveMoneyController extends Controller
             $to = "daxionginfo@gmail.com";
             $title = "ແກ້​ໄຂໂດຍ: (" . $model->user->first_name . ")<br/>";
             $body = "ປະ​ເພດ​ລາຍ​ຮັ​ບ: " . $model->tyeReceive->name . "<br/>";
+            if (!empty($model->description)) {
+                $body.=$model->description . '<br/>';
+            }
             $body.="ຈຳ​ນວນ​ເງີນ​ຮັບ: " . number_format($model->amount) . "ກີບ<br/>";
             $body.="ວັ​ນ​ທີຮັບ: " . $model->date;
             /*  $headers = "MIME-Version: 1.0" . "\r\n";

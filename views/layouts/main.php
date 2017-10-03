@@ -22,9 +22,10 @@ AppAsset::register($this);
 
     </head>
     <?php
-    $bg_menu = 'skin-purple';
-    $bg_footer = 'bg-purple';
-    Yii::$app->session['bg_buttoon'] = 'bg-purple';
+    $bg = app\models\Bg::find()->where(['id' => 1])->one();
+    $bg_menu = $bg->bg_menu;
+    $bg_footer = $bg->bg_footer;
+    Yii::$app->session['bg_buttoon'] = $bg->bg_button;
 
     ?>
     <body class="hold-transition <?= $bg_menu ?> sidebar-mini">
@@ -205,6 +206,11 @@ AppAsset::register($this);
                                 <li>
                                     <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user">
                                         <i class="fa fa-user"></i> <span>ຈັດ​ການຜູ້​ເຂົ້າ​ລະ​ບົບ</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=bg/update&id=1">
+                                        <i class="fa fa-user"></i> <span>ຕັ້​ງ​ຄ່າ​ສີ app</span>
                                     </a>
                                 </li>
                                 <?php

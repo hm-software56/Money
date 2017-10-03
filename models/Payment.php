@@ -1,6 +1,4 @@
-<?php
-
-namespace app\models;
+<?php namespace app\models;
 
 use Yii;
 
@@ -17,19 +15,22 @@ use Yii;
  * @property TypePay $typePay
  * @property User $user
  */
-class Payment extends \yii\db\ActiveRecord {
+class Payment extends \yii\db\ActiveRecord
+{
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'payment';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['amount', 'date', 'type_pay_id', 'user_id'], 'required', 'message' => 'ທ່ານ​ຕ້ອງ​ປ້ອນ​ {attribute}'],
             [['type_pay_id', 'user_id'], 'integer'],
@@ -43,7 +44,8 @@ class Payment extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'amount' => 'ຈຳ​ນວນ​ເງີນ',
@@ -57,20 +59,51 @@ class Payment extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTypePay() {
+    public function getTypePay()
+    {
         return $this->hasOne(TypePay::className(), ['id' => 'type_pay_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         $this->amount = substr(preg_replace('/\D/', '', $this->amount), 0, -2);
         return parent::beforeSave($insert);
     }
 
+    public static function onesignalnotification($sms)
+    {
+        $content = array(
+            "en" => $sms
+        );
+
+        $fields = array(
+            'app_id' => "8611a545-6f5f-4e15-9e3a-b992ae4c6cac",
+            'included_segments' => array('All'),
+            'data' => array("foo" => "bar"),
+            'contents' => $content,
+            'small_icon' => "ic_stat_onesignal_default.png",
+            'large_icon' => "ic_stat_onesignal_default.png",
+        );
+
+        $fields = json_encode($fields);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8', 'Authorization: Basic ZjZjZjdmYjAtZTY1MC00NGQ4LWFlNDItNTQ4NzIwMGMyM2U0'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
+    }
 }

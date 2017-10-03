@@ -108,19 +108,21 @@ class PaymentController extends Controller
             );
             $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
             // end send API
-
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ລາຍ​ຈ່າຍ​ຖືກ​ເກັບ​ໄວ້​ໃນ​ລະ​ບົບ​ແລ້ວ'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', ''));
             $to = "daxionginfo@gmail.com";
             $subject = "ປ້ອນ​ລາຍ​ຈ່າຍ (" . $model->user->first_name . ")";
             $tilte = "ຈ່າຍໂດຍ: (" . $model->user->first_name . ")<br/>";
             $body = "ປະ​ເພດ​ລາຍ​ຈ່າຍ: " . $model->typePay->name . "<br/>";
+            if (!empty($model->description)) {
+                $body.=$model->description . '<br/>';
+            }
             $body.="ຈຳ​ນວນ​ເງີນ​ຈ່າຍ: " . number_format($model->amount) . "ກີບ<br/>";
             $body.="ວັ​ນ​ທີຈ່າຍ: " . $model->date;
-            /* $headers = "MIME-Version: 1.0" . "\r\n";
-              $headers.="Content-Type: text/html; charset=utf-8" . "\r\n";
-              $headers.="From: {$to}\r\nReply-To: {$to}";
-              mail($to, $subject, $body, $headers); */
+
+            $sms = 'ຈ່າຍໂດຍ:' . $model->user->first_name . ", ປະ​ເພດ​ລາຍ​ຈ່າຍ:" . $model->typePay->name . ', ຈຳ​ນວນ​ເງີນ​ຈ່າຍ:' . number_format($model->amount) . 'ກີບ, ວັ​ນ​ທີຈ່າຍ:' . $model->date;
+            $payment_notification = Payment::onesignalnotification($sms);
+
             $sms = new \app\models\Sms();
             $sms->details = $body;
             $sms->title = $tilte;
@@ -167,6 +169,9 @@ class PaymentController extends Controller
             $subject = "ແກ້​ໄຂລາຍ​ຈ່າຍ (" . $model->user->first_name . ")";
             $title = "ແກ້​ໄຂໂດຍ: (" . $model->user->first_name . ")<br/>";
             $body = "ປະ​ເພດ​ລາຍ​ຈ່າຍ: " . $model->typePay->name . "<br/>";
+            if (!empty($model->description)) {
+                $body.=$model->description . '<br/>';
+            }
             $body.="ຈຳ​ນວນ​ເງີນ​ຈ່າຍ: " . number_format($model->amount) . "ກີບ<br/>";
             $body.="ວັ​ນ​ທີຈ່າຍ: " . $model->date;
             /* $headers = "MIME-Version: 1.0" . "\r\n";
