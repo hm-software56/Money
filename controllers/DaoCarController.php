@@ -79,6 +79,9 @@ class DaoCarController extends Controller
                 'date' => $model->date,
                 'remark' => $model->remark,
             );
+
+            $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
+            // end send API
             if ($model->status == 'Paid') {
                 $model->status = 'ຈ່າຍ​ແລ​້ວ';
             } elseif ($model->status == 'Saving') {
@@ -86,11 +89,8 @@ class DaoCarController extends Controller
             } else {
                 $model->status = 'ເອົາ​ໃຊ້​ແນວ​ອື່ນ';
             }
-            $sms = 'ຈຳ​ນວນ​ເງີນ​:' . number_format($model->amount) . 'ກີບ,' . 'ສະ​ຖາ​ນະ:' . $model->status . ', ວັ​ນ​ທີ:' . $model->date;
+            $sms = 'ຈຳ​ນວນ​ເງີນ​:' . number_format($model->amount) . 'ໂດ​ລາ,' . 'ສະ​ຖາ​ນະ:' . $model->status . ', ວັ​ນ​ທີ:' . $model->date;
             $payment_notification = \app\models\Payment::onesignalnotification($sms);
-
-            $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
-            // end send API
 
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ລາຍ​ຈ່າຍ​ຖືກ​ເກັບ​ໄວ້​ໃນ​ລະ​ບົບ​ແລ້ວ'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', ''));
@@ -126,7 +126,15 @@ class DaoCarController extends Controller
             );
             $response = $curl->setOption(CURLOPT_POSTFIELDS, http_build_query($value))->post(Yii::$app->params['api_url']);
             // end send API
-
+            if ($model->status == 'Paid') {
+                $model->status = 'ຈ່າຍ​ແລ​້ວ';
+            } elseif ($model->status == 'Saving') {
+                $model->status = 'ເກັບ​ໄວ້';
+            } else {
+                $model->status = 'ເອົາ​ໃຊ້​ແນວ​ອື່ນ';
+            }
+            $sms = 'ແກ້​ໄຂ ຈຳ​ນວນ​ເງີນ​:' . number_format($model->amount) . 'ໂດ​ລາ,' . 'ສະ​ຖາ​ນະ:' . $model->status . ', ວັ​ນ​ທີ:' . $model->date;
+            $payment_notification = \app\models\Payment::onesignalnotification($sms);
             \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ທ່ານ​ສຳ​ເລັດ​ການ​ແກ້​ໄຂ​ແລ້ວ'));
             \Yii::$app->getSession()->setFlash('action', \Yii::t('app', 'ແກ້​ໄຂ'));
             return $this->redirect(['index']);

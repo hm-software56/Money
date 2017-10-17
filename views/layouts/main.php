@@ -20,14 +20,24 @@ AppAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
-    </head>
-    <?php
-    $bg = app\models\Bg::find()->where(['id' => 1])->one();
-    $bg_menu = $bg->bg_menu;
-    $bg_footer = $bg->bg_footer;
-    Yii::$app->session['bg_buttoon'] = $bg->bg_button;
 
-    ?>
+        <?php
+        $bg = app\models\Bg::find()->where(['id' => 1])->one();
+        $bg_menu = $bg->bg_menu;
+        $bg_footer = $bg->bg_footer;
+        Yii::$app->session['bg_buttoon'] = $bg->bg_button;
+
+        ?>
+        <style>
+
+            .main-footer a:focus {
+                color: <?= $bg->bg_button_over ?> !important;
+            }
+            .btn:focus {
+                background-color: <?= $bg->bg_button_over ?> !important;
+            }
+        </style>
+    </head>
     <body class="hold-transition <?= $bg_menu ?> sidebar-mini">
         <?php $this->beginBody() ?>
         <div class="wrapper">

@@ -191,9 +191,3 @@ a.desc:after {
 .main-footer a {
     color: #fff !important;
 }
-.main-footer a:active {
-    color: red !important;
-}
-.main-footer a:hover {
-    color: red !important;
-}

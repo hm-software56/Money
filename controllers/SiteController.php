@@ -127,6 +127,8 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $user = \app\models\User::findOne(['username' => $model->username, 'password' => $model->password]);
             if (!empty($user->id)) {
+                $user->date=date('Y-m-d');
+                $user->save();
                 \Yii::$app->session['user'] = $user;
                 \Yii::$app->getSession()->setFlash('su', \Yii::t('app', 'ທ່ານ​ເຂົ້າ​ລະ​ບົບ​ຖືກ​ຕ້ອງກຳ​ລັງ​ເຂົ້າ​ຫາ​ຂໍ້​ມູນ​......'));
                 \Yii::$app->getSession()->setFlash('action', \Yii::t('app', ''));
@@ -151,6 +153,18 @@ class SiteController extends Controller
                 'model' => $model,
                 'login' => $login,
         ]);
+    }
+    public function actionCronjobchecklogin()
+    { 
+        $date=date('Y-m-d', strtotime(' -2 day'));
+        $user=\app\models\User::find()->where("date<='".$date."' and user_type='User'")->all();
+        foreach($user as $user)
+        {
+            $player_id=$user->player_id;
+        $sms="ກະ​ລຸ​ນາ​ຕ້ອງ​ປ້ອນ​ລ​າຍ​ຈ່າຍ ຫຼື ລາຍ​ຮັບ​ຂອງ​ທ່ານ​ເຂົ້າ​ລະ​ບົບ. ຂ​ອບ​ໃຈ....";
+        $payment_notification = \app\models\Payment::onesignalnotificationcrontab($sms,$player_id);
+        }
+        exit;
     }
 
     public function actionHome()

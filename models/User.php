@@ -45,7 +45,7 @@ class User extends \yii\db\ActiveRecord
         return [
             [['first_name', 'username', 'password', 'user_type', 'date', 'user_role_id'], 'required', 'message' => 'ຕ້ອງ​ປ້ອນ {attribute}'],
             [['status', 'user_role_id'], 'integer'],
-            [['user_type'], 'string'],
+            [['user_type','player_id'], 'string'],
             [['date'], 'safe'],
             // [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif'], 'maxSize' => 100000 * 1024, 'tooBig' => 'ຮູບ​ພາບ​ຂອງ​ທ່ານບໍ່​ໃຫ້​ເກີນ 10Kb.'],
             ['photo', 'file', 'extensions' => 'jpeg, gif, png', 'on' => ['insert', 'update']],

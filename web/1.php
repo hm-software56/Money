@@ -8,7 +8,8 @@ function sendMessage()
 
     $fields = array(
         'app_id' => "8611a545-6f5f-4e15-9e3a-b992ae4c6cac",
-        'included_segments' => array('All'),
+        //'included_segments' => array('All'),
+		'include_player_ids' => array("17ad4f7c-8094-4107-90de-15394d70b0dc"),
         'data' => array("foo" => "bar"),
         'contents' => $content,
         //'small_icon' => "resources/android/icon/drawable-xxxhdpi-icon.png",
