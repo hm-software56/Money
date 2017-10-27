@@ -37,8 +37,13 @@ AppAsset::register($this);
                 background-color: <?= $bg->bg_button_over ?> !important;
             }
         </style>
+
     </head>
     <body class="hold-transition <?= $bg_menu ?> sidebar-mini">
+        <div id = "loader" style="display: none;">
+            <span id="text-medel"> <img src = "http://dev.cyberia.la/testda/money/web/images/loading.gif" style="width:50px"></span>
+        </div>
+
         <?php $this->beginBody() ?>
         <div class="wrapper">
 
@@ -48,7 +53,7 @@ AppAsset::register($this);
                 if (!empty(Yii::$app->session['user'])) {
 
                     ?>
-                    <a id="a" class="logo" href="index.php?r=site/home">
+                    <a id="a" class="logo" href="index.php?r=site/home"  onclick="onclick_loadimg()">
                         <!-- mini logo for sidebar mini 50x50 pixels -->
                         <span class="logo-mini"><b>ລ</b>ກງ</span>
                         <!-- logo for regular state and mobile devices -->
@@ -118,10 +123,10 @@ AppAsset::register($this);
                                         <!-- Menu Footer-->
                                         <li class="user-footer bg-blue">
                                             <div class="pull-left">
-                                                <a  href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user/update&prof=true&id=<?= Yii::$app->session['user']->id ?>" class="btn bg-green btn-sm"><span class="fa fa-cogs"></span></a>
+                                                <a  onclick="onclick_loadimg()"  href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user/update&prof=true&id=<?= Yii::$app->session['user']->id ?>" class="btn bg-green btn-sm"><span class="fa fa-cogs"></span></a>
                                             </div>
                                             <div class="pull-right">
-                                                <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/logout" class="btn bg-red btn-sm"><span class="fa fa-power-off"></span></a>
+                                                <a  onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/logout" class="btn bg-red btn-sm"><span class="fa fa-power-off"></span></a>
                                             </div>
                                         </li>
                                     </ul>
@@ -163,31 +168,31 @@ AppAsset::register($this);
 
                                 ?>
                                 <li>
-                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
+                                    <a  onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ອອກ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=dao-car">
+                                    <a  onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=dao-car">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ຄ່າ​ລົດ​ໃຫຍ່</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money">
+                                    <a  onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຮັບ​ເຂົ້າ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a  href="#">
+                                    <a   href="#">
                                         <i class="fa fa-signal"></i> <span>ລາຍ​ງານ​</span>
                                     </a>
                                     <ul class="treeview-menu">
                                         <li>
-                                            <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
+                                            <a   onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                                 <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
                                         </li>
                                         <li>
-                                            <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
+                                            <a  onclick="onclick_loadimg()"  id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
                                                 <i class="fa fa-ra"></i>ລາຍ​ງານ​ລາຍ​ຮັບ</a>
                                         </li>
                                     </ul>
@@ -201,25 +206,25 @@ AppAsset::register($this);
 
                                 ?>
                                 <li>
-                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
+                                    <a  onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                         <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
                                 </li>
                                 <li>
-                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
+                                    <a  onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
                                         <i class="fa fa-ra"></i>ລາຍ​ງານ​ລາຍ​ຮັບ</a>
                                 </li>
                                 <li>
-                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/compare">
+                                    <a  onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/compare">
                                         <i class="fa fa-th"></i> <span>ສົ​ມ​ທຽບ​ລາຍ​ຮັບ​ລ່າຍ​ຈ່າຍ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user">
+                                    <a  onclick="onclick_loadimg()" id="a" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user">
                                         <i class="fa fa-user"></i> <span>ຈັດ​ການຜູ້​ເຂົ້າ​ລະ​ບົບ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=bg/update&id=1">
+                                    <a  onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=bg/update&id=1">
                                         <i class="fa fa-user"></i> <span>ຕັ້​ງ​ຄ່າ​ສີ app</span>
                                     </a>
                                 </li>
@@ -236,9 +241,10 @@ AppAsset::register($this);
 
             ?>
             <!-- Content Wrapper. Contains page content -->
-            <div id="load"></div>
+            <!--<div id="load"></div>--> <!-- Img Loading after refresh page  -->
             <div class="content-wrapper" style="background: #fff">
                 <section class="content" id="content">
+
                     <?= $content ?>
                 </section>
             </div>
@@ -250,7 +256,7 @@ AppAsset::register($this);
 
             <footer class="main-footer  <?= $bg_footer ?> " style=" color: #fff" >
                 <div class="pull-right">
-                    <a href="index.php?r=site/sms" style="color: #fff">
+                    <a href="index.php?r=site/sms" style="color: #fff"  onclick="onclick_loadimg()">
                         <?php
                         $cookie = Yii::$app->request->cookies;
                         $cookieValue = $cookie->getValue('check_sms');
@@ -273,8 +279,7 @@ AppAsset::register($this);
                         <i class="fa fa-envelope-o fa-2x"></i>
                     </a>
                 </div>
-                <a href="index.php?r=site/home" style="color: #fff"> <li class="fa fa-home fa-2x"></li></a>
-
+                <a href="index.php?r=site/home" style="color: #fff" onclick="onclick_loadimg()"> <li class="fa fa-home fa-2x"></li></a>
             </footer>
             <?php
             //  }
@@ -283,25 +288,13 @@ AppAsset::register($this);
         </div>
         <?php $this->endBody() ?>
         <script>
+            
             jQuery(function ($) {
                 $('#money').autoNumeric('init', {aSign: ' ກີບ', pSign: 's'});
             });
             jQuery(function ($) {
                 $('#money_dao').autoNumeric('init', {aSign: ' ໂດ​ລາ', pSign: 's'});
             });
-
-            document.onreadystatechange = function () {
-                var state = document.readyState
-                if (state == 'interactive') {
-                    document.getElementById('content').style.visibility = "visible";
-                } else if (state == 'complete') {
-                    setTimeout(function () {
-                        document.getElementById('interactive');
-                        document.getElementById('load').style.visibility = "hidden";
-                        document.getElementById('content').style.visibility = "visible";
-                    }, 1000);
-                }
-            }
         </script>
 
         <?php

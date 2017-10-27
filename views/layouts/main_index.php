@@ -37,12 +37,15 @@ AppAsset::register($this);
         </style>
     </head>
     <body class="hold-transition <?= $bg_menu ?> sidebar-mini">
+        <div id = "loader" style="display: none;">
+            <span id="text-medel"><img   src = "http://dev.cyberia.la/testda/money/web/images/loading.gif" style="width:50px"></span>
+        </div>
         <?php $this->beginBody() ?>
         <div class="wrapper">
 
             <header class="main-header navbar-fixed-top" >
                 <!-- Logo -->
-                <a class="logo" href="index.php?r=site/home">
+                <a class="logo" href="index.php?r=site/home" onclick="onclick_loadimg()">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>LT</span>
                     <!-- logo for regular state and mobile devices -->
@@ -88,10 +91,10 @@ AppAsset::register($this);
                                         <!-- Menu Footer-->
                                         <li class="user-footer bg-blue">
                                             <div class="pull-left">
-                                                <a  href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user/update&prof=true&id=<?= Yii::$app->session['user']->id ?>" class="btn bg-green btn-sm"><span class="fa fa-cogs"></span></a>
+                                                <a onclick="onclick_loadimg()"  href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user/update&prof=true&id=<?= Yii::$app->session['user']->id ?>" class="btn bg-green btn-sm"><span class="fa fa-cogs"></span></a>
                                             </div>
                                             <div class="pull-right">
-                                                <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/logout" class="btn bg-red btn-sm"><span class="fa fa-power-off"></span></a>
+                                                <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/logout" class="btn bg-red btn-sm"><span class="fa fa-power-off"></span></a>
                                             </div>
                                         </li>
                                     </ul>
@@ -132,17 +135,17 @@ AppAsset::register($this);
 
                                 ?>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ອອກ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=dao-car">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=dao-car">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຈ່າຍ​ຄ່າ​ລົດ​ໃຫຍ່</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money">
                                         <i class="fa fa-th"></i> <span>ຈັດ​ການເງີນ​ທີ່​ຮັບ​ເຂົ້າ</span>
                                     </a>
                                 </li>
@@ -152,11 +155,11 @@ AppAsset::register($this);
                                     </a>
                                     <ul class="treeview-menu">
                                         <li>
-                                            <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
+                                            <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                                 <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
                                         </li>
                                         <li>
-                                            <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
+                                            <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
                                                 <i class="fa fa-ra"></i>ລາຍ​ງານ​ລາຍ​ຮັບ</a>
                                         </li>
                                     </ul>
@@ -171,25 +174,25 @@ AppAsset::register($this);
 
                                 ?>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=payment/report">
                                         <i class="fa fa-sellsy"></i>ລາຍ​ງານ​ລາຍ​ຈ່າຍ</a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=recieve-money/report">
                                         <i class="fa fa-ra"></i>ລາຍ​ງານ​ລາຍ​ຮັບ</a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/compare">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/compare">
                                         <i class="fa fa-th"></i> <span>ສົ​ມ​ທຽບ​ລາຍ​ຮັບ​ລ່າຍ​ຈ່າຍ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=user">
                                         <i class="fa fa-user"></i> <span>ຈັດ​ການຜູ້​ເຂົ້າ​ລະ​ບົບ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=bg/update&id=1">
+                                    <a onclick="onclick_loadimg()" href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=bg/update&id=1">
                                         <i class="fa fa-user"></i> <span>ຕັ້​ງ​ຄ່າ​ສີ app</span>
                                     </a>
                                 </li>
@@ -206,7 +209,7 @@ AppAsset::register($this);
 
             ?>
             <!-- Content Wrapper. Contains page content -->
-            <div id="load"></div>
+            <!--<div id="load"></div>--> <!-- Img Loading after refresh page -->
             <div class="content-wrapper" style="background: #fff;">
 
                 <section class="content" id="content">
@@ -217,7 +220,7 @@ AppAsset::register($this);
             <!-- /.content-wrapper -->
             <footer class="main-footer  <?= $bg_footer ?> " style=" color: #fff" >
                 <div class="pull-right">
-                    <a href="index.php?r=site/sms" style="color: #fff">
+                    <a onclick="onclick_loadimg()" href="index.php?r=site/sms" style="color: #fff">
                         <?php
                         $cookie = Yii::$app->request->cookies;
                         $cookieValue = $cookie->getValue('check_sms');
@@ -240,7 +243,7 @@ AppAsset::register($this);
                         <i class="fa fa-envelope-o fa-2x"></i>
                     </a>
                 </div>
-                <a href="index.php?r=site/home" style="color: #fff"> <li class="fa fa-home fa-2x"></li></a>
+                <a onclick="onclick_loadimg()" href="index.php?r=site/home" style="color: #fff"> <li class="fa fa-home fa-2x"></li></a>
 
             </footer>
         </div>
@@ -269,18 +272,6 @@ foreach ($type_ps as $type_pss) {
 }
 
 ?>
-            document.onreadystatechange = function () {
-                var state = document.readyState
-                if (state == 'interactive') {
-                    document.getElementById('content').style.visibility = "visible";
-                } else if (state == 'complete') {
-                    setTimeout(function () {
-                        document.getElementById('interactive');
-                        document.getElementById('load').style.visibility = "hidden";
-                        document.getElementById('content').style.visibility = "visible";
-                    }, 1000);
-                }
-            }
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>

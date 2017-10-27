@@ -8,7 +8,7 @@ $pr = ($payment->queryScalar() * 100) / $recived->queryScalar();
     <div class="col-xs-12">
 
         <div class="info-box bg-blue">
-            <a style="color:#fff;" href="index.php?r=payment">
+            <a style="color:#fff;" href="index.php?r=payment"  onclick="onclick_loadimg()">
                 <span class="info-box-icon"><i class="fa fa-money "></i></span>
             </a>
             <div class="info-box-content">
@@ -32,7 +32,7 @@ $pr = ($payment->queryScalar() * 100) / $recived->queryScalar();
     </div>
     <div class="col-xs-12">
         <div class="info-box bg-green">
-            <a style="color:#fff;" href="index.php?r=recieve-money">
+            <a style="color:#fff;" href="index.php?r=recieve-money"  onclick="onclick_loadimg()">
                 <span class="info-box-icon"><i class="fa fa-inbox"></i></span>
             </a>
             <div class="info-box-content">
@@ -61,7 +61,7 @@ $pr = ($payment->queryScalar() * 100) / $recived->queryScalar();
     ?>
     <div class="col-xs-12">
         <div class="info-box bg-yellow">
-            <a style="color:#fff;" href="index.php?r=dao-car">
+            <a style="color:#fff;" href="index.php?r=dao-car"  onclick="onclick_loadimg()">
                 <span class="info-box-icon"><i class="fa fa-car "></i></span>
             </a>
             <div class="info-box-content">
@@ -79,7 +79,7 @@ $pr = ($payment->queryScalar() * 100) / $recived->queryScalar();
     </div>
     <div class="col-xs-12">
         <div class="info-box bg-blue-active">
-            <a style="color:#fff;" href="index.php?r=site/index">
+            <a style="color:#fff;" href="index.php?r=site/index"  onclick="onclick_loadimg()">
                 <span class="info-box-icon"><i class="fa fa-bar-chart"></i></span>
             </a>
             <div class="info-box-content">

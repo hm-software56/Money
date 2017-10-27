@@ -52,20 +52,21 @@ if (!isset($_GET['reg'])) {
               <!--  ຖ້າ​ທ່ານ​ຍັງ​ບໍໍ່​ມີ​ລະ​ຫັດ​ເຂົ້າ​ລະ​ບົບກົດ​ທີ່ນີ້ <a href="<?= Yii::$app->urlManager->baseUrl ?>/index.php?r=site/login&reg=true"><span class="fa fa-registered btn " ></span></a>-->
             </div>
             <div class="form-group has-feedback">
-                <input type="text"  name="LoginForm[username]" class="form-control" placeholder="ຊື່​ເຂົ້າ​ລະ​ບົບ" value="<?= $model->username ?>" required >
+                <input id="username" type="text"  name="LoginForm[username]" class="form-control" placeholder="ຊື່​ເຂົ້າ​ລະ​ບົບ" value="<?= $model->username ?>" >
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" name="LoginForm[password]" class="form-control" placeholder="ລະ​ຫັດ​ເຂົ້າ​ລະ​ບົບ" value="<?= $model->password ?>" required >
+                <input id="password" type="password" name="LoginForm[password]" class="form-control" placeholder="ລະ​ຫັດ​ເຂົ້າ​ລະ​ບົບ" value="<?= $model->password ?>" >
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <div class="col-xs-12" style="padding-right: 0px; padding-left: 0px;" align="right">
-                    <button type="submit" class="btn <?= Yii::$app->session['bg_buttoon'] ?>  col-xs-12"><span class="fa fa-lock" ></span> ເຂົ້າ​ລະ​ບົບ</button>
+                    <button  disabled id="login" type="submit" class="btn <?= Yii::$app->session['bg_buttoon'] ?>  col-xs-12" onclick="onclick_loadimg()"><span class="fa fa-lock" ></span> ເຂົ້າ​ລະ​ບົບ</button>
                 </div>
             </div>
         </div>
     </div>
+   
     <?php
     ActiveForm::end();
 } else {

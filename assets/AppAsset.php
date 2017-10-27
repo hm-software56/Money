@@ -66,6 +66,7 @@ class AppAsset extends AssetBundle
         // 'adminlte/dist/js/demo.js',
         //   "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js",
         //  "//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"
+        'js/block.submit.js',
     ];
     public $depends = [
 

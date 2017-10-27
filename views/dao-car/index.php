@@ -30,7 +30,7 @@ if (Yii::$app->session->hasFlash('su')) {
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4">
             <p align='right'>
-                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຈ່າຍ', ['create'], ['class' => 'btn ' . Yii::$app->session['bg_buttoon'] . ' btn-sm']) ?>
+                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຈ່າຍ', ['create'], ['class' => 'btn ' . Yii::$app->session['bg_buttoon'] . ' btn-sm', 'onclick' => "onclick_loadimg()"]) ?>
             </p>
         </div>
     </div>
@@ -88,15 +88,16 @@ if (Yii::$app->session->hasFlash('su')) {
                         Html::a(
                             '<span class="glyphicon glyphicon-edit"></span>', ['dao-car/update', 'id' => $data->id], [
                             'class' => 'btn btn-success btn-xs',
+                            'onclick' => "onclick_loadimg()",
                             ]
                         );
 
                         ?></td>
                 </tr>
-    <?php
-}
+                <?php
+            }
 
-?>
+            ?>
             <tr>
                 <td></td>
                 <td class="bg-yellow"><b ><?= number_format($total_save, 2) ?></b></td>

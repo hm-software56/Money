@@ -32,7 +32,7 @@ if (Yii::$app->session->hasFlash('su')) {
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4">
             <p align='right'>
-                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຮັບ', ['create'], ['class' => 'btn ' . Yii::$app->session['bg_buttoon'] . ' btn-sm']) ?>
+                <?= Html::a('<span class="fa fa-plus-circle"></span> ປ້ອນ​ລາຍ​ຮັບ', ['create'], ['class' => 'btn ' . Yii::$app->session['bg_buttoon'] . ' btn-sm', 'onclick' => "onclick_loadimg()"]) ?>
             </p>
         </div>
     </div>
@@ -79,6 +79,7 @@ if (Yii::$app->session->hasFlash('su')) {
                             return Html::a(
                                     '<span class="glyphicon glyphicon-edit"></span>', ['recieve-money/update', 'id' => $model->id], [
                                     'class' => 'btn btn-success btn-xs',
+                                    'onclick' => "onclick_loadimg()",
                                     ]
                             );
                         },
@@ -90,6 +91,7 @@ if (Yii::$app->session->hasFlash('su')) {
                                     'data-method' => "post",
                                     'data-confirm' => Yii::t('app', 'ທ່ານ​ຕ້ອງ​ການ​ຈະ​ລືບ​ລາຍ​ຮັບແຖວນີ້​ແທ້​ບໍ.?'),
                                     'class' => 'btn btn-danger btn-xs',
+                                    'onclick' => "onclick_loadimg()",
                                     ]
                             );
                         },
