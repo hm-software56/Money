@@ -22,9 +22,11 @@ class SiteController extends Controller
                         return $this->render('sms');
                     } else {
                         $this->redirect(['site/login']);
+                         return FALSE;
                     }
                 } else {
                     $this->redirect(['site/login']);
+                     return FALSE;
                 }
             }
         } elseif (Yii::$app->session['timeout'] < date('dHi')) {
@@ -124,7 +126,6 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

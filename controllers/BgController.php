@@ -19,10 +19,12 @@ class BgController extends Controller
         if (empty(\Yii::$app->session['user'])) {
             if (Yii::$app->controller->action->id != "login") {
                 $this->redirect(['site/login']);
+                 return FALSE;
             }
         } elseif (Yii::$app->session['timeout'] < date('dHi')) {
             unset(\Yii::$app->session['user']);
             $this->redirect(['site/login']);
+             return FALSE;
         } else {
             Yii::$app->session['timeout'] = Yii::$app->params['timeout'];
         }
