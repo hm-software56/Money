@@ -70,7 +70,7 @@ $pr = ($payment->queryScalar() * 100) / $recived->queryScalar();
                 <div class="progress">
                     <div class="progress-bar" style="width: <?= ($pay_car->queryScalar() * 100) / $pay_car_all->queryScalar() ?>%"></div>
                 </div>
-                <span class="progress-description">
+                <span class="progress-description"> 
                     <?= round(($pay_car->queryScalar() * 100) / $pay_car_all->queryScalar()) ?>%
                 </span>
             </div>
@@ -79,7 +79,7 @@ $pr = ($payment->queryScalar() * 100) / $recived->queryScalar();
     </div>
     <div class="col-xs-12">
         <div class="info-box bg-blue-active">
-            <a style="color:#fff;" href="index.php?r=site/index"  onclick="onclick_loadimg()">
+            <a style="color:#fff;" href="index.php?r=site/index&index=true"  onclick="onclick_loadimg()">
                 <span class="info-box-icon"><i class="fa fa-bar-chart"></i></span>
             </a>
             <div class="info-box-content">

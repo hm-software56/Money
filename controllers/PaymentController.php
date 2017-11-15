@@ -1,4 +1,5 @@
-<?php namespace app\controllers;
+<?php 
+namespace app\controllers;
 
 use Yii;
 use app\models\Payment;
@@ -72,10 +73,10 @@ class PaymentController extends Controller
         return $this->render('report', ['model' => $model, 'model_pre' => $model_pre, 'model_m' => $model_m, 'model_m_pre' => $model_m_pre, 'model_y' => $model_y]);
     }
 
-    /**
+    /** 
      * Displays a single Payment model.
      * @param integer $id
-     * @return mixed
+     * @return mixed   
      */
     public function actionView($id)
     {

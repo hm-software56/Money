@@ -154,13 +154,14 @@ a.desc:after {
 
 #loader {
 	position: fixed;
-	left: 0px;
+	left: 45%;
 	top: 0px;
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
 	/*background: url('http://dev.cyberia.la/testda/money/web/images/ajax-loader.gif') 50% 50% no-repeat ;*/
-    text-align: center;
+    /*text-align: center;*/
+
 }
 #text-medel {
   position: absolute;

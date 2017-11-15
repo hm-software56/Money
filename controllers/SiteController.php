@@ -81,7 +81,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if(!isset($_GET['index']))
+        {
+             unset(\Yii::$app->session['user']);
+             return $this->redirect(['login']);
+        }else{
         return $this->render('index');
+        }
     }
 
     public function actionSms()
